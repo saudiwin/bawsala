@@ -1,0 +1,230 @@
+id,nom,sexe,date,ville,pays,profession,categorie,liste,bloc
+547d62aa12bdaa5876a2b3ba,Salma Elloumi,F,1956-06-05 0:00:00,,Tunisie,Directrice Générale d'une société industrielle,Chef d'entreprise,Mouvement Nidaa Tounes,Aucun bloc
+547d62a912bdaa5876a2b2b8,Karim Helali,H,1970-05-06 0:00:00,Ariana,Tunisie,Magistrat,Magistrat,Afek Tounes,"Afek Tounes, le mouvement national et l'appel des tunisiens à l'étranger"
+547d62a912bdaa5876a2b2ba,Mohamed Ghannem,H,1955-05-27 0:00:00,Kairouan,Tunisie,Médecin cardiologue,Médecin ,Afek Tounes,"Afek Tounes, le mouvement national et l'appel des tunisiens à l'étranger"
+547d62a912bdaa5876a2b2bc,Yassine Brahim,H,1966-02-20 0:00:00,Bizerte,Tunisie,Homme d'affaires,Chef d'entreprise,Afek Tounes,Aucun bloc
+547d62a912bdaa5876a2b2be,Ali Bennour,H,1953-12-29 0:00:00,Bekalta,Tunisie,Acteur professionnel,Artiste,Afek Tounes,"Afek Tounes, le mouvement national et l'appel des tunisiens à l'étranger"
+547d62a912bdaa5876a2b2c0,Noomane Fehri,H,1965-08-06 0:00:00,"El Mida, Nabeul",Tunisie,Directeur Général et fondateur d'un cabinet de conseil international,Chef d'entreprise,Afek Tounes,Aucun bloc
+547d62a912bdaa5876a2b2c2,Mohamed Anouar Adhar,H,1958-10-19 0:00:00,Sfax,Tunisie,Ingénieur dans une société,Ingénieur ,Afek Tounes,"Afek Tounes, le mouvement national et l'appel des tunisiens à l'étranger"
+547d62a912bdaa5876a2b2c4,Hafedh Zouari,H,1963-03-18 0:00:00,"Kalâa Kebira, Sousse",Tunisie,Homme d'affaires,Chef d'entreprise,Afek Tounes,"Afek Tounes, le mouvement national et l'appel des tunisiens à l'étranger"
+547d62a912bdaa5876a2b2c6,Riadh Mouakhar,H,1963-07-31 0:00:00,Sfax,Tunisie,Médecin,Médecin ,Afek Tounes,"Afek Tounes, le mouvement national et l'appel des tunisiens à l'étranger"
+547d62a912bdaa5876a2b2c8,Iyad Dahmani,H,1977-09-13 0:00:00,,Tunisie,Journaliste,Journaliste,Al Jomhouri,Bloc Social-Démocrate
+547d62a912bdaa5876a2b2ca,Mehdi Ben Gharbia,H,1973-06-19 0:00:00,Tunis,Tunisie,Homme d'affaires,Chef d'entreprise,Alliance Démocratique,Bloc Social-Démocrate
+547d62a912bdaa5876a2b2cc,Sabri Dekhil,H,1967-08-14 0:00:00,,,Médecin spécialiste,Médecin ,Congrès Pour la République,Aucun bloc
+547d62a912bdaa5876a2b2ce,Mabrouk Hrizi,H,1976-10-30 0:00:00,Sbeitla,Tunisie,Juriste,Non catégorisé,Congrès Pour la République,Aucun bloc
+547d62a912bdaa5876a2b2d0,Ibrahim Ben Said,H,1974-03-10 0:00:00,,Tunisie,Enseignant principal du secondaire,Enseignant du secondaire,Congrès Pour la République,Aucun bloc
+547d62a912bdaa5876a2b2d2,Imed Daimi,H,1970-06-20 0:00:00,,Tunisie,Ingénieur en systèmes d'information,Ingénieur ,Congrès Pour la République,Aucun bloc
+547d62a912bdaa5876a2b2de,Touhami Abdouli,H,1968-03-01 0:00:00,,Tunisie,Enseignant universitaire,Enseignant universitaire,Front National du Salut,Aucun bloc
+547d62a912bdaa5876a2b386,Hayet Kebaier,F,1956-07-31 0:00:00,Bizerte,Tunisie,Directrice centrale au sein d'une banque,Cadre supérieur dans le secteur bancaire,Mouvement Nidaa Tounes,Aucun bloc
+547d62a912bdaa5876a2b2d4,Rim Thairi,F,1981-04-06 0:00:00,Kairouan,Tunisie,Etudiante,Etudiant,Courant de l'amour,Bloc Social-Démocrate
+547d62a912bdaa5876a2b2d6,Mohamed El Hamdi,H,1954-10-01 0:00:00,Sidi Bouzid,Tunisie,Maitre d'application,Instituteur enseignement de base,Courant de l'amour,Bloc Social-Démocrate
+547d62a912bdaa5876a2b2d8,Ghazi Chaouachi,H,1963-02-05 0:00:00,Bardo,Tunisie,Avocat,Avocat,Courant Démocratique,Aucun bloc
+547d62a912bdaa5876a2b2da,Noomane El Euch,H,1967-06-09 0:00:00,,Tunisie,Libraire,Chef d'entreprise,Courant Démocratique,Aucun bloc
+547d62a912bdaa5876a2b2dc,Samia Abbou,F,1965-11-03 0:00:00,Tebourba,Tunisie,Avocate,Avocat,Courant Démocratique,Aucun bloc
+547d62a912bdaa5876a2b2e0,Zied Lakhdhar,H,1962-07-01 0:00:00,,Tunisie,Enseignant du secondaire,Enseignant du secondaire,Front Populaire,Front Populaire
+547d62a912bdaa5876a2b2e2,Ammar Amroussia,H,1960-07-23 0:00:00,"Zannouch, Gafsa",Tunisie,Instituteur,Instituteur enseignement de base,Front Populaire,Front Populaire
+547d62a912bdaa5876a2b2e4,Mongi Rahoui,H,1964-06-13 0:00:00,Jendouba,Tunisie,Cadre dans une banque ,Cadre supérieur dans le secteur bancaire,Front Populaire,Front Populaire
+547d62a912bdaa5876a2b2e6,Tarek Barrak,H,1953-08-05 0:00:00,,Tunisie,Retraité,Retraité,Front Populaire,Front Populaire
+547d62a912bdaa5876a2b2e8,Aymen Aloui,H,1981-08-08 0:00:00,,Tunisie,Contrôleur des services financiers,Fonctionnaire dans le secteur privé,Front Populaire,Front Populaire
+547d62a912bdaa5876a2b2ea,Nizar Amami,H,1962-03-06 0:00:00,,Tunisie,Gestionnaire financier adjoint à la Poste,Fonctionnaire publique,Front Populaire,Front Populaire
+547d62a912bdaa5876a2b2ec,Mourad Hamaidi,H,1971-05-16 0:00:00,"Menzel Salem, Tajerouine",Tunisie,Avocat,Avocat,Front Populaire,Front Populaire
+547d62a912bdaa5876a2b2ee,Haykel Belgacem,H,1972-06-28 0:00:00,,Tunisie,Maitre d'application,Instituteur enseignement de base,Front Populaire,Front Populaire
+547d62a912bdaa5876a2b2f0,Abdelmoumen Belanes,H,1956-02-03 0:00:00,,Tunisie,Travailleur Journalier,Travailleur Journalier,Front Populaire,Front Populaire
+547d62a912bdaa5876a2b2f2,Fathi Chamkhi,H,1955-01-02 0:00:00,,Tunisie,Enseignant universitaire,Enseignant universitaire,Front Populaire,Front Populaire
+547d62a912bdaa5876a2b2f4,Chafik Ayadi,H,1956-10-09 0:00:00,Sfax,Tunisie,Enseignant du secondaire,Enseignant du secondaire,Front Populaire,Front Populaire
+547d62a912bdaa5876a2b2f6,Souad Bayouli,F,1965-02-23 0:00:00,,Tunisie,Enseignante du secondaire,Enseignant du secondaire,Front Populaire,Front Populaire
+547d62a912bdaa5876a2b2f8,Mbarka Aouania ,F,1967-07-08 0:00:00,"Sidi Ali Ben Aoun, Sidi Bouzid",Tunisie,Institutrice,Instituteur enseignement de base,Front Populaire,Front Populaire
+547d62a912bdaa5876a2b2fa,Jilani Hammami,H,1957-08-07 0:00:00,,Tunisie,Fonctionnaire dans une entreprise,Fonctionnaire dans le secteur privé,Front Populaire,Front Populaire
+547d62a912bdaa5876a2b2fc,Ahmed Seddik,H,1963-11-21 0:00:00,,Tunisie,Avocat,Avocat,Front Populaire,Front Populaire
+547d62a912bdaa5876a2b2fe,Faycel Tebini,H,1966-02-17 0:00:00,,Tunisie,Agent déclarant en douane,Fonctionnaire dans le secteur privé,La voix des agriculteurs,Bloc Social-Démocrate
+547d62a912bdaa5876a2b300,Riadh Jaidane,H,1972-01-17 0:00:00,,Tunisie,Avocat,Avocat,Liste de l'appel des tunisiens à l'étranger,"Afek Tounes, le mouvement national et l'appel des tunisiens à l'étranger"
+547d62a912bdaa5876a2b302,Abderrazak Chraiet,H,1937-04-16 0:00:00,,Tunisie,Président Directeur Général d'une société,Chef d'entreprise,"Liste indépendante ""Majd Al Jarid""",Aucun bloc
+547d62a912bdaa5876a2b304,Adnane Hajji,H,1958-10-25 0:00:00,"Redeyef, Gafsa",Tunisie,Maitre d'application,Instituteur enseignement de base,"Liste indépendante ""Rad El Itibar""",Bloc Social-Démocrate
+547d62a912bdaa5876a2b306,Hmed Khaskhoussi,H,1947-12-16 0:00:00,"Meknassy, Sidi Bouzid",Tunisie,Enseignant universitaire,Enseignant universitaire,Mouvement des Démocrates Socialistes,Bloc Social-Démocrate
+547d62a912bdaa5876a2b308,Ridha Dellai,H,1962-12-23 0:00:00,,Tunisie,Enseignant du secondaire,Enseignant du secondaire,Mouvement du Peuple,Aucun bloc
+547d62a912bdaa5876a2b30a,Zouhair Maghzaoui,H,1965-07-26 0:00:00,,Tunisie,Enseignant du secondaire,Enseignant du secondaire,Mouvement du Peuple,Aucun bloc
+547d62a912bdaa5876a2b30c,Salem Labiadh,H,1964-03-14 0:00:00,,Tunisie,Enseignant universitaire,Enseignant universitaire,Mouvement du Peuple,Aucun bloc
+547d62a912bdaa5876a2b30e,Ramzi Ben Fraj,H,1968-09-29 0:00:00,,Tunisie,Avocat,Avocat,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b310,Sahbi Atig,H,1959-08-14 0:00:00,,Tunisie,Chercheur universitaire,Chercheur universitaire,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b311,Jamila Debbech,F,1968-08-14 0:00:00,Medenine,Tunisie,Chef de service à la Caisse Nationale d'Assurance Maladie,Cadre dans la fonction publique,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b313,Sami Fetnassi,H,1964-10-22 0:00:00,Beja,Tunisie,Directeur financier et administratif d'une clinique privée,Cadre supérieur dans le secteur privé,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b315,Noureddine Bhiri,H,1958-07-10 0:00:00,"Jbeniana, Sfax",Tunisie,Avocat auprès de la cour de cassation,Avocat,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b316,Hela Hammi,F,1964-11-25 0:00:00,Tunis,Tunisie,Directrice adjointe dans une banque,Cadre supérieur dans le secteur bancaire,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b317,Mohamed Mahjoub,H,1956-08-24 0:00:00,,Tunisie,Médecin,Médecin ,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b319,Bechir Ellazzem,H,1959-12-08 0:00:00,Bizerte ,Tunisie,Pédiatre ,Médecin ,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b31a,Emna Ben Hmayed,F,1980-07-10 0:00:00,,Tunisie,Enseignante du secondaire,Enseignant du secondaire,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b31b,Samir Dilou,H,1966-12-30 0:00:00,Tunis,Tunisie,Avocat,Avocat,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b31d,Sayida Ounissi,F,1987-02-03 0:00:00,Tunis,Tunisie,Etudiante,Chercheur universitaire,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b31e,Houcine Jaziri,H,1968-07-02 0:00:00,Zarzis,Tunisie,Fondateur et dirigeant d'un institut d'enseignement de la langue arabe et de la culture arabo-islamique,Chef d'entreprise,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b320,Neji Jmal,H,1966-05-21 0:00:00,Sousse,Tunisie,Directeur d'une école privée,Fonctionnaire dans le secteur privé,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b321,Dalila Babba,F,1966-04-29 0:00:00,,Tunisie,Membre de l'Assemblée Nationale Constituante,Non catégorisé,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b323,Mohamed Zrig,H,1957-08-29 0:00:00,,Tunisie,Chef de département dans une société,Cadre dans le secteur privé,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b324,Amal Souid,F,1988-06-15 0:00:00,Gabès,Tunisie,Etudiante,Etudiant,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b325,Habib Khedher,H,1971-01-08 0:00:00,"Hamma, Gabès",Tunisie,Avocat ,Avocat,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b326,Radhia Toumi,F,1982-10-27 0:00:00,Gabès,Tunisie,Médecin généraliste,Médecin ,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b328,Mohamed Mohsen Soudani,H,1965-06-17 0:00:00,,Tunisie,Enseignant agrégé du secondaire,Enseignant du secondaire,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b329,Zeineb Brahmi,F,1984-12-07 0:00:00,"El Mdhilla, Gafsa",Tunisie,Avocate,Avocat,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b32b,Imen Ben Mhamed,F,1984-11-13 0:00:00,Kebili,Tunisie,Diplômée de l'enseignement supérieur,Représentant d'association,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b32c,Oussama Al Saghir,H,1983-07-20 0:00:00,Tunis,Tunisie,Diplômé de l'enseignement supérieur,Représentant d'association,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b32e,Ahmed Mechergui,H,1969-08-04 0:00:00,Jendouba,Tunisie,Enseignant du secondaire,Enseignant du secondaire,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b32f,Sana Mersni,F,1984-12-01 0:00:00,Jendouba,Tunisie,Avocate,Avocat,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b331,Mahmoud Gouiaa,H,1965-08-18 0:00:00,Kairouan,Tunisie,Enseignant du secondaire,Enseignant du secondaire,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b332,Ferida Laabidi,F,1968-03-24 0:00:00,El Kef,Tunisie,Avocate ,Avocat,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b333,Hedi Soula,H,1961-08-03 0:00:00,Kairouan,Tunisie,Ingénieur général au ministère de l'agriculture,Cadre supérieur dans la fonction publique,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b335,Walid Banneni,H,1956-11-11 0:00:00,,Tunisie,Fonctionnaire dans une entreprise,Fonctionnaire dans le secteur privé,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b336,Safia Khalfi,F,1967-04-20 0:00:00,,Tunisie,Enseignante du secondaire,Enseignant du secondaire,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b338,Mohamed Ali Bedoui,H,1952-10-05 0:00:00,,Tunisie,Retraité,Retraité,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b34d,Boutheina Ben Yaghlane,F,1966-04-12 0:00:00,,Tunisie,Enseignante universitaire,Enseignant universitaire,Mouvement Ennahdha,Aucun bloc
+547d62a912bdaa5876a2b380,Mohamed Lazhar Akremi,H,1959-03-06 0:00:00,Gafsa,Tunisie,Avocat,Avocat,Mouvement Nidaa Tounes,Aucun bloc
+547d62a912bdaa5876a2b339,Mahbouba Ben Dhifallah,F,1969-12-02 0:00:00,,Tunisie,Ingénieur principal,Cadre supérieur dans la fonction publique,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b33b,Imed Khemiri,H,1964-11-29 0:00:00,,Tunisie,Directeur administratif et financier d'une société,Cadre supérieur dans le secteur privé,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b33c,Latifa Habachi,F,1972-08-13 0:00:00,Tunis,Tunisie,Avocate,Avocat,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b33e,Abdellatif Mekki,H,1962-08-27 0:00:00,"El Ksour, le Kef",Tunisie,Médecin ,Médecin ,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b340,Hedi Ben Braham,H,1951-04-13 0:00:00,Mehdia,Tunisie,Enseignant universitaire,Enseignant universitaire,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b341,Leila Oueslati,F,1964-05-10 0:00:00,Kairouan,Tunisie,Enseignante principale du secondaire,Enseignant du secondaire,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b343,Ameur Laraiedh,H,1965-03-24 0:00:00,Medenine,Tunisie,Enseignant universitaire de sociologie,Enseignant universitaire,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b344,Basma Jebali,F,1975-12-25 0:00:00,"Houmet Essouk, Djerba",Tunisie,Membre de l'Assemblée Nationale Constituante,Non catégorisé,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b345,Ahmed Ameri,H,1952-03-15 0:00:00,"El Fjij, Kairouan",Tunisie,Retraité,Retraité,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b346,Heger Bouzemmi,F,1988-05-26 0:00:00,Kairouan,Tunisie,Etudiante,Etudiant,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b347,Lakhdhar Belhouchat,H,1964-11-01 0:00:00,Medenine,Tunisie,Maitre d'application principal,Instituteur enseignement de base,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b349,Mohamed Kamel Besbes,H,1958-02-22 0:00:00,,Tunisie,Ingénieur principal,Cadre supérieur dans la fonction publique,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b34a,Chahida Fraj,F,1960-09-01 0:00:00,,Tunisie,Ingénieur en chef,Cadre supérieur dans la fonction publique,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b34c,Mohamed Sidhom,H,1951-09-07 0:00:00,,Tunisie,Retraité,Retraité,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b34f,Meherzia Laabidi,F,1963-12-17 0:00:00,Hammamet,Tunisie,Traductrice à l'étranger,Traductrice,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b351,Maher Madhioub,H,1964-03-08 0:00:00,,Tunisie,Journaliste,Journaliste,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b353,Fathi Ayadi,H,1964-04-17 0:00:00,,Tunisie,Enseignant du secondaire,Enseignant du secondaire,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b354,Soulef Ksantini,F,1969-11-01 0:00:00,,Tunisie,Enseignante du secondaire,Enseignant du secondaire,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b355,Slim Besbes,H,1963-05-07 0:00:00,Tunis,Tunisie,Enseignant universitaire,Enseignant universitaire,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b357,Mohamed Frikha,H,1963-12-17 0:00:00,,Tunisie,Directeur Général d'une entreprise,Cadre supérieur dans le secteur privé,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b358,Kalthoum Badreddine,F,1963-07-28 0:00:00,Sfax,Tunisie,Avocate,Avocat,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b359,Badreddine Abdelkefi,H,1959-07-07 0:00:00,Sfax,Tunisie,Enseignant du secondaire,Enseignant du secondaire,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b35b,Naoufel Jammali,H,1976-10-14 0:00:00,Tunis,Tunisie,Enseignant universitaire,Enseignant universitaire,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b35c,Hayet Omri,F,1981-12-13 0:00:00,"Regueb, Sidi Bouzid",Tunisie,Chercheuse universitaire,Chercheur universitaire,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b35e,Zouheir Rajbi,H,1959-08-26 0:00:00,Siliana,Tunisie,Chef de service à la SONEDE,Cadre dans la fonction publique,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b360,Zied Laadhari,H,1975-03-30 0:00:00,Sousse,Tunisie,Avocat,Avocat,Mouvement Ennahdha,Aucun bloc
+547d62a912bdaa5876a2b361,Monia Brahim,F,1966-09-23 0:00:00,Sousse,Tunisie,Etudiante,Etudiant,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b362,Lajmi Lourimi,H,1962-01-08 0:00:00,,Tunisie,Enseignant du secondaire,Enseignant du secondaire,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b364,Bechir Khelifi,H,1975-08-06 0:00:00,"Remada, Tataouine",Tunisie,Avocat auprès de la cour d'appel,Avocat,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b365,Jamila Jouini,F,1968-02-21 0:00:00,Tataouine,Tunisie,Enseignante du secondaire,Enseignant du secondaire,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b366,Hssine Yahyaoui,H,1954-06-26 0:00:00,"Ksar, Bir Lahmar",Tunisie,Ingénieur en chef en géologie,Cadre supérieur dans la fonction publique,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b368,Mohamed Lakhdhar Lajili,H,1964-03-09 0:00:00,Tozeur,Tunisie,Enseignant principal du secondaire,Enseignant du secondaire,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b36a,Ali Laraiedh,H,1955-08-15 0:00:00,Medenine,Tunisie,Ingénieur,Ingénieur ,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b36b,Yamina Zoghlami,F,1970-02-28 0:00:00,Tunis,Tunisie,Enseignante du secondaire,Enseignant du secondaire,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b36c,Nadhir Ben Ammou,H,1959-11-27 0:00:00,Nabeul,Tunisie,Avocat auprès de la cour de cassation,Avocat,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b36e,Abdelfattah Mourou,H,1948-06-01 0:00:00,Tunis,Tunisie,Avocat,Avocat,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b36f,Aroua Ben Abbas,F,1963-08-18 0:00:00,,Tunisie,Architecte d'intérieur,Architecte,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b371,Mohamed Ben Salem,H,1953-02-19 0:00:00,"Hammam Zriba, Zaghouan",Tunisie,Ingénieur agronome,Ingénieur ,Mouvement Ennahdha,Mouvement Ennahdha
+547d62a912bdaa5876a2b373,Lamia Mlayah,F,1979-03-13 0:00:00,,Tunisie,Chercheuse en biochimie et électrophysiologie,Chercheur universitaire,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b375,Hatem Ferjani,H,1970-12-04 0:00:00,Hammam Lif,Tunisie,Avocat spécialisé auprès des cours européennes,Avocat,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b377,Abdelaziz Kotti,H,1970-04-30 0:00:00,Sfax,Tunisie,Membre de l'Assemblée Nationale Constituante,Non catégorisé,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b378,Leila Hamrouni,F,1960-11-12 0:00:00,,Tunisie,Chercheuse,Chercheur universitaire,Mouvement Nidaa Tounes,Bloc Al Horra
+547d62a912bdaa5876a2b379,Hssan Amri,H,1977-07-12 0:00:00,Siliana,Tunisie,Commerçant,Commerçant,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b37a,Sabrine Goubantini,F,1987-11-10 0:00:00,Clichy,France,Expert comptable stagiaire,Comptable,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b37c,Mounir Hamdi,H,1967-02-28 0:00:00,,Tunisie,Avocat,Avocat,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b37d,Najla Saadaoui,F,1980-03-24 0:00:00,,Tunisie,Avocate,Avocat,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b37e,Issam Matoussi,H,1978-06-10 0:00:00,,Tunisie,Assistant universitaire,Enseignant universitaire,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b381,Wafa Makhlouf,F,1975-10-20 0:00:00,,Tunisie,Chef d'entreprise de services,Chef d'entreprise,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b382,Mohamed Troudi,H,1972-02-28 0:00:00,,Tunisie,Gérant de bureau d'études et de formation,Fonctionnaire dans le secteur privé,Mouvement Nidaa Tounes,Bloc Al Horra
+547d62a912bdaa5876a2b383,Olfa Soukri,F,1976-06-16 0:00:00,Tunis,Tunisie,Enseignante universitaire,Enseignant universitaire,Mouvement Nidaa Tounes,Aucun bloc
+547d62a912bdaa5876a2b385,Ali Ben Salem,H,1932-06-15 0:00:00,Bizerte,Tunisie,Retraité,Retraité,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b387,Brahim Nacef,H,1952-09-14 0:00:00,Bizerte,Tunisie,Pharmacien,Pharmacien,Mouvement Nidaa Tounes,Bloc Al Horra
+547d62a912bdaa5876a2b388,Ibtihej Ben Helal,F,1980-10-27 0:00:00,,Tunisie,Fonctionnaire,Fonctionnaire publique,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b38a,Khaled Chouket,H,1969-11-11 0:00:00,Sfax,Tunisie,Maitre de conférences de l'enseignement supérieur,Enseignant universitaire,Mouvement Nidaa Tounes,Aucun bloc
+547d62a912bdaa5876a2b38b,Khawla Ben Aicha,F,1988-05-19 0:00:00,,Tunisie,Chercheuse en marketing et communication,Chercheur universitaire,Mouvement Nidaa Tounes,Bloc Al Horra
+547d62a912bdaa5876a2b38d,Kamel Dhaouadi,H,1970-11-14 0:00:00,,Tunisie,Avocat d'affaires,Avocat,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b38e,Najia Ben Abdelhafidh,F,1965-08-19 0:00:00,"Jemmal, Monastir",Tunisie,Enseignante du secondaire,Enseignant du secondaire,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b390,Hassouna Nasfi,H,1972-09-15 0:00:00,Gabès,Tunisie,Directeur d'un établissement public,Cadre supérieur dans la fonction publique,Mouvement Nidaa Tounes,Bloc Al Horra
+547d62a912bdaa5876a2b392,Sofien Toubel,H,1976-03-28 0:00:00,,Tunisie,Enseignant du secondaire,Enseignant du secondaire,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b393,Asma Abou Hana,F,1978-10-24 0:00:00,,Tunisie,Huissier de justice,Huissier de justice,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b395,Mohamed Ben Souf,H,1975-11-29 0:00:00,,Tunisie,Coordinateur d'un logement pour les personnes âgées,Assistant social,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b397,Belgacem Dkhili,H,1964-09-22 0:00:00,,Tunisie,Directeur général d'une entreprise publique,Cadre supérieur dans la fonction publique,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b398,Jihen Aouichi,F,1984-03-03 0:00:00,,Tunisie,Avocate,Avocat,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b399,Chaker Ayadi,H,1967-06-27 0:00:00,Madina El Atika de Sfax,Tunisie,Avocat,Avocat,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b39b,Souhail Alouini,H,1956-11-27 0:00:00,Tunis,Tunisie,Médecin chirurgien spécialiste en pédiatrie,Médecin ,Mouvement Nidaa Tounes,Bloc Al Horra
+547d62a912bdaa5876a2b39c,Ons Hattab,F,1977-01-02 0:00:00,Kairouan,Tunisie,Enseignante universitaire,Enseignant universitaire,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b39d,Mohamed Ennaceur Jbira,H,1970-07-23 0:00:00,Sbikha,Tunisie,Avocat,Avocat,Mouvement Nidaa Tounes,Bloc Al Horra
+547d62a912bdaa5876a2b39f,Mohamed Kamel Hamzaoui,H,1944-10-16 0:00:00,,Tunisie,Président Directeur Général d'une société privée,Chef d'entreprise,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b3a0,Ikram Moulahi,F,1984-02-28 0:00:00,,Tunisie,Etudiante,Etudiant,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b3a1,Mohamed Rachdi Bouguerra,H,1949-01-07 0:00:00,,Tunisie,Retraité,Retraité,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b3a3,Mohamed Fadhel Ben Omrane,H,1963-07-20 0:00:00,Douz,Tunisie,Avocat,Avocat,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b3a5,Mondher Belhaj Ali,H,1955-10-31 0:00:00,,Tunisie,Enseignant universitaire,Enseignant universitaire,Mouvement Nidaa Tounes,Bloc Al Horra
+547d62a912bdaa5876a2b3a6,Houda Tekaya,F,1963-01-02 0:00:00,Tunis,Tunisie,Gérant d'une société,Fonctionnaire dans le secteur privé,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62a912bdaa5876a2b3a7,Mohamed Nejib Torjmane,H,1952-09-15 0:00:00,,Tunisie,Représentant légal d'une société,Fonctionnaire dans le secteur privé,Mouvement Nidaa Tounes,Bloc Al Horra
+547d62a912bdaa5876a2b3a9,Abada Kefi,H,1950-02-21 0:00:00,Le Kef,Tunisie,Avocat auprès de la cour de cassation,Avocat,Mouvement Nidaa Tounes,Bloc Al Horra
+547d62aa12bdaa5876a2b3aa,El Khansa Ben Harrath,F,1968-12-13 0:00:00,,Tunisie,Ingénieur ,Ingénieur ,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3ab,Mongi Harbaoui,H,1971-09-29 0:00:00,,Tunisie,Comptable public,Comptable,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3ad,Mohamed Ennaceur,H,1934-03-21 0:00:00,El Jem,Tunisie,Avocat,Avocat,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3ae,Souad Zaouali,F,1955-11-16 0:00:00,,Tunisie,Directrice Générale d'un établissement étatique,Cadre supérieur dans la fonction publique,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3af,Imed Ouled Jebril,H,1982-04-13 0:00:00,,Tunisie,Enseignant du secondaire,Enseignant du secondaire,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3b0,Rabha Ben Hassine,F,1968-06-15 0:00:00,,Tunisie,Enseignante principale du secondaire,Enseignant du secondaire,Mouvement Nidaa Tounes,Bloc Al Horra
+547d62aa12bdaa5876a2b3b2,Bechir Ben Amor,H,1948-04-21 0:00:00,,Tunisie,Président Directeur Général d'un groupe privé,Chef d'entreprise,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3b4,Mohamed Jalel Ghedira,H,1958-04-20 0:00:00,Monastir,Tunisie,"Directeur du bureau des études stratégiques en sécurité, prévention et affaires de sûreté",Retraité,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3b5,Hela Omrane,F,1980-09-16 0:00:00,Le Kef,Tunisie,Technicien Supérieur en Biologie Industrielle,Technicien supérieur,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3b6,Mohamed Saidane,H,1960-11-28 0:00:00,Tunis,Tunisie,Chef d'entreprise,Chef d'entreprise,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3b7,Sameh Bouhaouel,F,1972-08-11 0:00:00,,Tunisie,Avocate auprès de la cour de cassation,Avocat,Mouvement Nidaa Tounes,Bloc Al Horra
+547d62aa12bdaa5876a2b3b8,Lotfi Nabli,H,1956-11-29 0:00:00,Tunis,Tunisie,Maitre de conférences de l'enseignement supérieur,Enseignant universitaire,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3bb,Houssem Bounenni,H,1974-07-05 0:00:00,,Tunisie,Commissaire aux comptes,Fonctionnaire dans le secteur privé,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3bc,Nadia Zangar,F,1964-06-16 0:00:00,,Tunisie,Dentiste,Médecin ,Mouvement Nidaa Tounes,Bloc Al Horra
+547d62aa12bdaa5876a2b3bd,Chakib Bani,H,1983-10-06 0:00:00,,Tunisie,Enseignant universitaire,Enseignant universitaire,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3bf,Khemais Ksila,H,1956-05-01 0:00:00,Kélibia,Tunisie,Employé de la Société Nationale des Chemins de Fer Tunisienne,Fonctionnaire publique,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3c0,Meriem Boujbel,F,1978-09-27 0:00:00,,Tunisie,Gestionnaire adjoint dans une société,Fonctionnaire dans le secteur privé,Mouvement Nidaa Tounes,Bloc Al Horra
+547d62aa12bdaa5876a2b3c1,Walid Jalled,H,1976-11-30 0:00:00,,Tunisie,Gestionnaire technique à la pharmacie centrale,Fonctionnaire dans le secteur privé,Mouvement Nidaa Tounes,Bloc Al Horra
+547d62aa12bdaa5876a2b3c3,Abderraouf El May,H,1959-09-17 0:00:00,Tunis,Tunisie,Directeur général au sein d'une société,Cadre supérieur dans le secteur privé,Mouvement Nidaa Tounes,Bloc Al Horra
+547d62aa12bdaa5876a2b3c5,Mohamed Hedi Gueddich,H,1948-09-03 0:00:00,,Tunisie,Retraité,Retraité,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3c6,Sameh Dammak,F,1973-05-16 0:00:00,,Tunisie,Chef d'entreprise,Chef d'entreprise,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3c8,Moncef Sellami,H,1938-05-27 0:00:00,Sfax,Tunisie,Homme d'affaires,Chef d'entreprise,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3c9,Heger Laaroussi,F,1968-07-18 0:00:00,Sfax,Tunisie,Avocate auprès de la cour de cassation,Avocat,Mouvement Nidaa Tounes,Bloc Al Horra
+547d62aa12bdaa5876a2b3ca,Ismail Ben Mahmoud,H,1966-07-25 0:00:00,"Skhira, Sfax",Tunisie,Chef de service au sein d'une société,Fonctionnaire dans le secteur privé,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3cb,Fatma Mseddi,F,1979-12-16 0:00:00,Sfax,Tunisie,Chercheuse universitaire,Chercheur universitaire,Mouvement Nidaa Tounes,Aucun bloc
+547d62aa12bdaa5876a2b3cd,Salem Hamdi,H,1954-01-15 0:00:00,,Tunisie,Enseignant universitaire,Enseignant universitaire,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3ce,Abir Abdelli,F,1977-10-04 0:00:00,Sidi Bouzid,Tunisie,Directrice ressources humaines dans une société privée,Cadre supérieur dans le secteur privé,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3d0,Salah Bargaoui,H,1959-04-20 0:00:00,,Tunisie,Avocat,Avocat,Mouvement Nidaa Tounes,Bloc Al Horra
+547d62aa12bdaa5876a2b3d1,Sana Salhi,F,1987-05-07 0:00:00,"Rouhia, Siliana",Tunisie,Enseignante du secondaire,Enseignant du secondaire,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3d3,Ridha Charfeddine,H,1952-07-02 0:00:00,,Tunisie,Président Directeur Général de laboratoires de médicaments,Chef d'entreprise,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3d4,Zohra Idriss,F,1959-01-19 0:00:00,,Tunisie,Femme d'affaires,Chef d'entreprise,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3d5,Hamdi Guezguez,H,1964-06-01 0:00:00,Tunis,Tunisie,Ingénieur principal au ministère de l'industrie,Cadre supérieur dans la fonction publique,Mouvement Nidaa Tounes,Aucun bloc
+547d62aa12bdaa5876a2b3d6,Nawel Tayech,F,1986-05-10 0:00:00,"Enfidha, Sousse",Tunisie,Cadre à l'aéroport Enfidha,Fonctionnaire dans le secteur privé,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3d7,Faycel Khelifa,H,1968-02-26 0:00:00,"Kalâa Soghra, Sousse",Tunisie,Directeur d'un établissement public,Cadre supérieur dans la fonction publique,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3d9,Taieb Medni,H,1966-01-04 0:00:00,Tataouine,Tunisie,avocat auprès de la cour de cassation,Avocat,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3db,Abderraouf Cherif,H,1952-08-02 0:00:00,,Tunisie,Médecin chirurgien,Médecin ,Mouvement Nidaa Tounes,Bloc Al Horra
+547d62aa12bdaa5876a2b3dd,Leila Ouled Ali,F,1964-05-31 0:00:00,,Tunisie,Directrice à l'agence nationale de l'énergie,Cadre supérieur dans la fonction publique,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3de,Abdennaceur Chouikh,H,1957-01-11 0:00:00,,Tunisie,Directeur général d'une société,Cadre supérieur dans le secteur privé,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3df,Ibtissem Jebabli,F,1980-08-30 0:00:00,Tunis,Tunisie,Avocate,Avocat,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3e1,Said Aidi,H,1961-05-08 0:00:00,"Salammbo, Tunis",Tunisie,Membre du conseil d'administration d'une société,Chef d'entreprise,Mouvement Nidaa Tounes,Aucun bloc
+547d62aa12bdaa5876a2b3e2,Bochra Belhaj Hamida,F,1955-05-19 0:00:00,Zaghouan,Tunisie,Avocate auprès de la cour de cassation,Avocat,Mouvement Nidaa Tounes,Bloc Al Horra
+547d62aa12bdaa5876a2b3e3,Mustapha Ben Ahmed,H,1953-12-30 0:00:00,"Kalâa Soghra, Sousse",Tunisie,Technicien à la régie du tabac et des allumettes,Fonctionnaire publique,Mouvement Nidaa Tounes,Bloc Al Horra
+547d62aa12bdaa5876a2b3e4,Leila Bougatef,F,1967-01-06 0:00:00,Laval,France,Experte en ressources humaines,Cadre supérieur dans le secteur privé,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3e5,Sahbi Ben Fraj,H,1966-05-25 0:00:00,,Tunisie,Médecin,Médecin ,Mouvement Nidaa Tounes,Bloc Al Horra
+547d62aa12bdaa5876a2b3e7,Mohamed Ramzi Khmiss,H,1969-01-13 0:00:00,"El Fahs, Zaghouan",Tunisie,Gestionnaire à l'administration régionale de la Poste,Fonctionnaire publique,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3e8,Leila Zahaf,F,1959-03-22 0:00:00,Zaghouan,Tunisie,Assistante à l'enseignement supérieur,Enseignant universitaire,Mouvement Nidaa Tounes,Bloc Al Horra
+547d62aa12bdaa5876a2b3ea,Lotfi Ali,H,1965-05-11 0:00:00,,Tunisie,Homme d'affaires,Chef d'entreprise,Parti l'initiative,Bloc Social-Démocrate
+547d62aa12bdaa5876a2b3ec,Ahmed Saidi,H,1953-09-25 0:00:00,,Tunisie,Médecin,Médecin ,Parti l'initiative,Bloc Social-Démocrate
+547d62aa12bdaa5876a2b3ee,Naceur Channoufi,H,1967-08-28 0:00:00,,Tunisie,Directeur d'une école primaire,Instituteur enseignement de base,Parti l'initiative,Bloc Social-Démocrate
+547d62aa12bdaa5876a2b3f0,Youssef Jouini,H,1963-02-26 0:00:00,,Tunisie,Administrateur d'un arrondissement municipale,Fonctionnaire publique,Union Patriotique Libre,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3f2,Noureddine Ben Achour,H,1962-01-02 0:00:00,Beja,Tunisie,Avocat,Agriculteur,Union Patriotique Libre,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3f4,Taoufik Jemli,H,1970-10-22 0:00:00,Tunis,Tunisie,Maitre d'application,Instituteur enseignement de base,Union Patriotique Libre,Union Patriotique Libre
+547d62aa12bdaa5876a2b3f6,Ali Belakhoua,H,1963-04-07 0:00:00,Saint-Louis,États-Unis d'Amérique,Gérant d'une société,Fonctionnaire dans le secteur privé,Union Patriotique Libre,Mouvement Nidaa Tounes
+547d62aa12bdaa5876a2b3f8,Mohamed Amine Kahloul,H,1953-07-13 0:00:00,Gabès,Tunisie,Retraité,Retraité,Union Patriotique Libre,Union Patriotique Libre
+547d62aa12bdaa5876a2b3fa,Dorra Yaacoubi,F,1983-01-15 0:00:00,,Tunisie,Enseignante universitaire spécialisée dans les ressources humaines,Enseignant universitaire,Union Patriotique Libre,Union Patriotique Libre
+547d62aa12bdaa5876a2b3fc,Tarek Fetiti,H,1972-04-21 0:00:00,"El Oueslatia, Kairouan",Tunisie,Directeur régional de la formation professionnelle,Cadre supérieur dans la fonction publique,Union Patriotique Libre,Union Patriotique Libre
+547d62aa12bdaa5876a2b3fe,Mahmoud Kahri,H,1964-05-09 0:00:00,Kasserine,Tunisie,Fonctionnaire,Fonctionnaire publique,Union Patriotique Libre,Union Patriotique Libre
+547d62aa12bdaa5876a2b400,Faouzia Ben Fodha,F,1963-07-19 0:00:00,,Tunisie,Directrice d'une école,Instituteur enseignement de base,Union Patriotique Libre,Union Patriotique Libre
+547d62aa12bdaa5876a2b402,Kamel Harraghi,H,1955-01-10 0:00:00,Le Kef,Tunisie,Attaché d'administration,Fonctionnaire publique,Union Patriotique Libre,Union Patriotique Libre
+547d62aa12bdaa5876a2b404,Tahar Fdhil,H,1964-03-05 0:00:00,,Tunisie,Avocat,Avocat,Union Patriotique Libre,Union Patriotique Libre
+547d62aa12bdaa5876a2b406,Abdelkader Ben Dhifallah,H,1973-11-06 0:00:00,Menzel Bouzelfa,Tunisie,Agriculteur,Agriculteur,Union Patriotique Libre,Union Patriotique Libre
+547d62aa12bdaa5876a2b408,Noureddine Mrabti,H,1974-01-05 0:00:00,"Makther, Siliana",Tunisie,Membre de l'Assemblée Nationale Constituante,Non catégorisé,Union Patriotique Libre,Union Patriotique Libre
+547d62aa12bdaa5876a2b40a,Abderraouf Chebbi,H,1979-08-20 0:00:00,,Tunisie,Retraité,Retraité,Union Patriotique Libre,Union Patriotique Libre
+547d62aa12bdaa5876a2b40c,Mohsen Hssan,H,1970-10-10 0:00:00,,Tunisie,Président Directeur Général,Chef d'entreprise,Union Patriotique Libre,Aucun bloc
+547d62aa12bdaa5876a2b40e,Ridha Zghondi,H,1962-01-29 0:00:00,,Tunisie,Avocat,Avocat,Union Patriotique Libre,Mouvement Nidaa Tounes
+54ec816912bdaa27f6450601,Rim Mahjoub,F,1966-03-16 0:00:00,,,,,Afek Tounes,"Afek Tounes, le mouvement national et l'appel des tunisiens à l'étranger"
+54ec81d212bdaa27f6450602,Lilia Younes Ksibi,F,,,,,,Afek Tounes,"Afek Tounes, le mouvement national et l'appel des tunisiens à l'étranger"
+54ec8ac612bdaa27f6450603,Nozha Biaoui,F,,,,,,Front National du Salut,"Afek Tounes, le mouvement national et l'appel des tunisiens à l'étranger"
+54ec8b2512bdaa27f6450604,Moez Belhaj Rhouma,H,1966-03-09 0:00:00,,,,,Mouvement Ennahdha,Mouvement Ennahdha
+54ec8b7b12bdaa27f6450605,Wafa Attia,F,,,,,,Mouvement Ennahdha,Mouvement Ennahdha
+54ec927312bdaa27f6450606,Taher Battikh,H,,,,,,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+54ec932412bdaa27f6450607,Lamia Gharbi,F,,,,,,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+54ec93a812bdaa27f6450608,Houda Slim,F,,,,,,Mouvement Nidaa Tounes,Bloc Al Horra
+55af8a5a12bdaa3245ab6fa4,Noura Amri,F,,,,,,Mouvement Nidaa Tounes,Mouvement Nidaa Tounes
+5684835212bdaa034bb8b715,Taoufik Ouali,H,,,,,,Mouvement Nidaa Tounes,Bloc Al Horra
+56c1a96a12bdaa24bd1b065e,Olfa Jouini,F,,,,,,Union Patriotique Libre,Union Patriotique Libre
+56c1fea012bdaa24bd1b0667,Marouan Felfel,H,,,,,,Mouvement Nidaa Tounes,Bloc Al Horra

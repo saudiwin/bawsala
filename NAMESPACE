@@ -2,4 +2,8 @@
 
 export(clean_data)
 export(fix_bills)
+import(dplyr)
+import(ggplot2)
+import(magrittr)
+import(tibble)
 import(tidyverse)

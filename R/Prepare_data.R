@@ -88,6 +88,7 @@
 #' @param use_nas TRUE/FALSE For ordinal data, whether absences should be coded as a separate category (TRUE) or coded as NA (FALSE)
 #' @param to_run Which of the datasets to use in the analysis. Put 1 for binary yes/no, 2 for binary yes/no v. abstain, 3 for ordinal
 #' @param sample_it Whether to use a sample of the dataset for analysis. Useful for testing models.
+#' @import dplyr tibble ggplot2 magrittr
 #' @export
 clean_data <- function(keep_legis=1,use_subset=FALSE,subset_party=c("Bloc Al Horra","Mouvement Nidaa Tounes"),
                       use_both=FALSE,

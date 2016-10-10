@@ -91,7 +91,7 @@
 #' @import dplyr tibble ggplot2 magrittr
 #' @export
 clean_data <- function(keep_legis=1,use_subset=FALSE,subset_party=c("Bloc Al Horra","Mouvement Nidaa Tounes"),
-                      use_both=FALSE,
+                      use_both=FALSE,refleg="ARP_Bochra Belhaj Hamida",
                       legis=1,use_vb=FALSE,use_nas=FALSE,to_run=3,sample_it=FALSE) {
 
   # Need to read-in all the data
@@ -100,8 +100,8 @@ clean_data <- function(keep_legis=1,use_subset=FALSE,subset_party=c("Bloc Al Hor
 
   vote_data <- list(arp_votes=fresh_data$arp_votes,
                     anc_votes=fresh_data$anc_votes)
-  member_data <- list(arp_members=fresh_data$arp_members,
-                      anc_members=fresh_data$anc_members)
+  member_data <- list(arp_votes=fresh_data$arp_members,
+                      anc_votes=fresh_data$anc_members)
 
   if(to_run==1) {
     #Binary yes/no
@@ -145,6 +145,15 @@ clean_data <- function(keep_legis=1,use_subset=FALSE,subset_party=c("Bloc Al Hor
       x %<>% filter(legis.names %in% to_subset$legis_names)
     })
   }
+
+  if(sample_it==TRUE) {
+    cleaned <- lapply(cleaned,function(x) {
+      x <-    x %>% sample_n(15) %>% select_(~sample(ncol(x),size=150))
+      x
+    })
+
+
+  }
     # Reorder based on reference legislator
 
   cleaned <- lapply(cleaned,function(x){
@@ -164,56 +173,54 @@ clean_data <- function(keep_legis=1,use_subset=FALSE,subset_party=c("Bloc Al Hor
 #' @param party_data Data frame with all of the party and demographic information for legislators in both legislatures
 #' @param vote_data Data frame with all of the votes for the particular legislature of analysis
 #' @export
-fix_bills <- function(legislator=NULL,party=NULL,party_data=NULL,vote_data=NULL) {
+fix_bills <- function(legislator=NULL,party=NULL,party_data=NULL,vote_data=NULL,legislature=NULL) {
 
-  leg_votes <- vote_data[legislator,]
+  # Pull ref legislator votes and majority party votes
 
-  party_leg <- party_data$vote_match[party_data$parliament_bloc==party]
+  leg_votes <- vote_data[[legislature]] %>% filter(legis.names==legislator) %>% distinct %>% gather(Bill,amount,-bloc,-id,-legis.names) %>%
+    mutate(x=as.numeric(amount))
 
-  party_vote <- vote_data[party_leg,]
+  party_votes <- vote_data[[legislature]] %>% filter(parliament_bloc==party)
 
-  # Need party votes and also ratios of within-party votes
+  # Calculate votes for which the majority party vote was unanimous
 
-  unan_party_votes <- apply(party_vote,2,function(x) {
-
+  unan_party_votes <- vote_data[[legislature]] %>% summarize_at(vars(matches("Bill")),(function(x) {
     if(length(unique(x[!is.na(x)]))==1) {
       unique(x[!is.na(x)])
     } else {
       NA
     }
-  })
+  })) %>% as.numeric
 
-  party_ratio <- apply(party_vote,2,function(x) {
+    # Need party votes and also ratios of within-party votes
+  party_ratio <- vote_data[[legislature]] %>% select(matches("Bill")) %>% lapply(function(x) {
     tables <- prop.table(table(x))
     # Need to check and see if there is only one vote for the party. If there was, sort will screw up the data.frame
     if(length(tables)==1) {
-      tables <- tables %>% as.data.frame
+      tables <- tables %>% as_tibble
     } else {
-      tables <- tables %>% sort(decreasing=TRUE) %>% as.data.frame
+      tables <- tables %>% sort(decreasing=TRUE) %>% as_tibble
     }
 
     return(tables)
-  })
+  }) %>% bind_rows(.id="Bill") %>% group_by(Bill) %>% filter(n==max(n)) %>% distinct(.keep_all=TRUE) %>% ungroup %>%
+    gather(variable,amount,-Bill)  %>% filter(variable %in% c("n","x"))  %>% mutate(amount=as.numeric(amount)) %>%
+    spread(variable,amount)
+
 
   # Use the ratios of party votes for each piece of legislation to determine in which votes the reference
   # legislator did not vote with the majority party
 
-  leg_resist <- sapply(1:length(party_ratio),function(x) {
+  leg_resist <- full_join(leg_votes,party_ratio,by='Bill',suffix=c("_leg","_party")) %>% arrange(Bill) %>%
+    mutate(agree=(x_leg==x_party)) %>% group_by(agree) %>% arrange(desc(n)) %>% ungroup
 
-    if((!is.na(leg_votes[x])) && (leg_votes[x]!=party_ratio[[x]][1,1])) {
-      party_ratio[[x]][1,2] %>% as.numeric %>% return
-    } else {
-      return(0)
-    }
-  })
+  abstain_leg <- leg_resist %>% filter(agree==FALSE, n==max(n),x_leg==2) %>% select(Bill) %>% slice(1)
+  yes_leg <- leg_resist %>% filter(agree==FALSE,x_leg==max(x_leg,na.rm=TRUE)) %>% filter(n==max(n)) %>% select(Bill) %>% slice(1) %>% as.character
+  no_leg <- leg_resist %>% filter(agree==FALSE, x_leg==min(x_leg,na.rm=TRUE)) %>% filter(n==max(n)) %>% select(Bill) %>% slice(1) %>% as.character
+  with_party_leg <- leg_resist %>% filter(agree==TRUE,n==1) %>% slice(1) %>% select(Bill) %>% as.character
 
-  abstain_leg <- which(leg_resist==max(leg_resist) & leg_votes==2)
-  yes_leg <- which(leg_resist==max(leg_resist) & leg_votes==3)
-  no_leg <- which((leg_resist==max(leg_resist)) & leg_votes==1)
-  with_party_leg <- which(unan_party_votes==leg_votes & leg_votes==1)[1]
-  # Final columns
 
-  final_constraint <- c(abstain_leg[1],yes_leg[1],no_leg[1],with_party_leg)
+  final_constraint <- c(abstain_leg,yes_leg,no_leg,with_party_leg)
   constraint_num <- c(0.5,0,1,-1)
 
   return(list(constrain_bills=final_constraint,constrain_pos=constraint_num))

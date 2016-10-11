@@ -154,6 +154,22 @@ clean_data <- function(keep_legis=1,use_subset=FALSE,subset_party=c("Bloc Al Hor
 
 
   }
+
+  # Should be at least two types of votes per bill
+
+  cleaned <- cleaned %>% lapply(function(y) {
+    orig <- y %>% select(-matches("Bill"))
+    y <- y %>% select(matches("Bill"))
+    y <- y %>%  select_if(function(x) {
+      if(length(table(x))<2) {
+        FALSE
+      } else {
+        TRUE
+      }
+    })
+    orig <- bind_cols(orig,y)
+  })
+
     # Reorder based on reference legislator
 
   cleaned <- lapply(cleaned,function(x){
@@ -173,24 +189,15 @@ clean_data <- function(keep_legis=1,use_subset=FALSE,subset_party=c("Bloc Al Hor
 #' @param party_data Data frame with all of the party and demographic information for legislators in both legislatures
 #' @param vote_data Data frame with all of the votes for the particular legislature of analysis
 #' @export
-fix_bills <- function(legislator=NULL,party=NULL,party_data=NULL,vote_data=NULL,legislature=NULL) {
+#' @import tidyr
+fix_bills <- function(legislator=NULL,party=NULL,vote_data=NULL,legislature=NULL) {
 
   # Pull ref legislator votes and majority party votes
 
   leg_votes <- vote_data[[legislature]] %>% filter(legis.names==legislator) %>% distinct %>% gather(Bill,amount,-bloc,-id,-legis.names) %>%
     mutate(x=as.numeric(amount))
 
-  party_votes <- vote_data[[legislature]] %>% filter(parliament_bloc==party)
-
-  # Calculate votes for which the majority party vote was unanimous
-
-  unan_party_votes <- vote_data[[legislature]] %>% summarize_at(vars(matches("Bill")),(function(x) {
-    if(length(unique(x[!is.na(x)]))==1) {
-      unique(x[!is.na(x)])
-    } else {
-      NA
-    }
-  })) %>% as.numeric
+  party_votes <- vote_data[[legislature]] %>% filter(bloc==party)
 
     # Need party votes and also ratios of within-party votes
   party_ratio <- vote_data[[legislature]] %>% select(matches("Bill")) %>% lapply(function(x) {
@@ -214,7 +221,7 @@ fix_bills <- function(legislator=NULL,party=NULL,party_data=NULL,vote_data=NULL,
   leg_resist <- full_join(leg_votes,party_ratio,by='Bill',suffix=c("_leg","_party")) %>% arrange(Bill) %>%
     mutate(agree=(x_leg==x_party)) %>% group_by(agree) %>% arrange(desc(n)) %>% ungroup
 
-  abstain_leg <- leg_resist %>% filter(agree==FALSE, n==max(n),x_leg==2) %>% select(Bill) %>% slice(1)
+  abstain_leg <- leg_resist %>% filter(agree==FALSE, n==max(n),x_leg==2) %>% select(Bill) %>% slice(1) %>% as.character
   yes_leg <- leg_resist %>% filter(agree==FALSE,x_leg==max(x_leg,na.rm=TRUE)) %>% filter(n==max(n)) %>% select(Bill) %>% slice(1) %>% as.character
   no_leg <- leg_resist %>% filter(agree==FALSE, x_leg==min(x_leg,na.rm=TRUE)) %>% filter(n==max(n)) %>% select(Bill) %>% slice(1) %>% as.character
   with_party_leg <- leg_resist %>% filter(agree==TRUE,n==1) %>% slice(1) %>% select(Bill) %>% as.character
@@ -222,6 +229,30 @@ fix_bills <- function(legislator=NULL,party=NULL,party_data=NULL,vote_data=NULL,
 
   final_constraint <- c(abstain_leg,yes_leg,no_leg,with_party_leg)
   constraint_num <- c(0.5,0,1,-1)
+  constraints <- tibble(final_constraint=final_constraint,constraint_num=constraint_num) %>% filter(grepl("Bill",final_constraint))
+  return(constraints)
+}
 
-  return(list(constrain_bills=final_constraint,constrain_pos=constraint_num))
+
+#' @export
+prepare_matrix <- function(cleaned=NULL,legis=1,legislature=NULL,to_fix=NULL,use_both=FALSE) {
+
+  # Move constrained bills to end
+
+  cleaned <- lapply(cleaned, function(x) {
+    cols_sel <- to_fix$final_constraint
+    check_names <- names(x)
+    cols_sel <- match(cols_sel,check_names)
+    x <- bind_cols(select(x,-cols_sel),select(x,cols_sel))
+  })
+
+  if(use_both==TRUE) {
+    cleaned %<>% rbind_row(cleaned)
+    vote_matrix <- cleaned %>% as.matrix
+  } else {
+
+  vote_matrix <- cleaned[[legislature]] %>% select(matches("Bill")) %>% as.matrix
+  }
+
+  return(vote_matrix)
 }

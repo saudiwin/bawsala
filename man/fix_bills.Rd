@@ -4,17 +4,17 @@
 \alias{fix_bills}
 \title{Function to take a data set, a legislator name, a majority party, and find bills to fix positions}
 \usage{
-fix_bills(legislator = NULL, party = NULL, party_data = NULL,
-  vote_data = NULL)
+fix_bills(legislator = NULL, party = NULL, vote_data = NULL,
+  legislature = NULL)
 }
 \arguments{
 \item{legislator}{Character string of the name of the legislator to use as a reference (ideal point fixed at 0)}
 
 \item{party}{Character string of the majority party in the legislature (will be used to determine reference legislator's ideal points on bills)}
 
-\item{party_data}{Data frame with all of the party and demographic information for legislators in both legislatures}
-
 \item{vote_data}{Data frame with all of the votes for the particular legislature of analysis}
+
+\item{party_data}{Data frame with all of the party and demographic information for legislators in both legislatures}
 }
 \description{
 Function to take a data set, a legislator name, a majority party, and find bills to fix positions

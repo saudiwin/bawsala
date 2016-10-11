@@ -6,8 +6,8 @@
 \usage{
 clean_data(keep_legis = 1, use_subset = FALSE,
   subset_party = c("Bloc Al Horra", "Mouvement Nidaa Tounes"),
-  use_both = FALSE, legis = 1, use_vb = FALSE, use_nas = FALSE,
-  to_run = 3, sample_it = FALSE)
+  use_both = FALSE, refleg = "ARP_Bochra Belhaj Hamida", legis = 1,
+  use_vb = FALSE, use_nas = FALSE, to_run = 3, sample_it = FALSE)
 }
 \arguments{
 \item{keep_legis}{Number of legislator votes required to keep them in the dataset}
@@ -15,6 +15,8 @@ clean_data(keep_legis = 1, use_subset = FALSE,
 \item{use_subset}{TRUE/FALSE Use only a subset of the dataset?}
 
 \item{use_both}{TRUE/FALSE Should both the ANC and ARP datasets be combined?}
+
+\item{refleg}{Character string name of reference legislator}
 
 \item{legis}{Which legislator to use if use_both==FALSE. Options are 1 for ARP and 2 for ANC}
 
@@ -25,8 +27,6 @@ clean_data(keep_legis = 1, use_subset = FALSE,
 \item{to_run}{Which of the datasets to use in the analysis. Put 1 for binary yes/no, 2 for binary yes/no v. abstain, 3 for ordinal}
 
 \item{sample_it}{Whether to use a sample of the dataset for analysis. Useful for testing models.}
-
-\item{refleg}{Character string name of reference legislator}
 
 \item{if}{use_subset==TRUE, a vector of party bloc names with which to subset the data}
 }

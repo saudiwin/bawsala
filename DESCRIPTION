@@ -5,7 +5,7 @@ Version: 0.1
 Date: 2016-10-07
 Author: Robert Kubinec
 Maintainer: Robert Kubinec <rmk7xy@virginia.edu>
-Imports: dplyr,ggplot2,tibble,magrittr,data.table,stringdist
+Imports: dplyr,ggplot2,tibble,magrittr,data.table,stringdist,rstan
 Description: More about what it does (maybe more than one line)
 License: What license is it under?
 LazyData: TRUE

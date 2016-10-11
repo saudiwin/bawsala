@@ -175,7 +175,7 @@ clean_data <- function(keep_legis=1,use_subset=FALSE,subset_party=c("Bloc Al Hor
   cleaned <- lapply(cleaned,function(x){
       y <-  x %>%  filter(legis.names==refleg)
       z <- x %>% filter(legis.names!=refleg)
-      x %<>% bind_rows(z,y)
+      x <-  bind_rows(z,y)
   })
 
 
@@ -255,4 +255,20 @@ prepare_matrix <- function(cleaned=NULL,legis=1,legislature=NULL,to_fix=NULL,use
   }
 
   return(vote_matrix)
+}
+
+#' @import plotly
+#' @export
+plot_IRT <- function(cleaned=NULL,stan_obj=NULL,legislature=NULL) {
+  means_fit <- rstan::summary(sample_fit)[[1]]
+  legis_means <- as_tibble(means_fit[grepl("L_open\\[",row.names(means_fit)),])
+
+  # Only need to use the specific legislature of interest for plotting
+  if(!is.null(legislature)) {
+    cleaned <- cleaned[[legislature]]
+  }
+  legis_means <- bind_cols(legis_means,cleaned) %>% rename(estimate=`mean`)
+  legis_means <- arrange(legis_means,estimate) %>% mutate(lowci=abs(estimate-`2.5%`),highci=abs(estimate-`97.5%`),
+                                                          totalci=lowci+highci)
+  plot_ly(legis_means,x=~estimate,y=~legis.names) %>% add_markers(error_x=~list(arrayminus=lowci,array=highci))
 }

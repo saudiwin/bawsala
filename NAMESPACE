@@ -2,10 +2,12 @@
 
 export(clean_data)
 export(fix_bills)
+export(plot_IRT)
 export(prepare_matrix)
 import(dplyr)
 import(ggplot2)
 import(magrittr)
+import(plotly)
 import(tibble)
 import(tidyr)
 import(tidyverse)

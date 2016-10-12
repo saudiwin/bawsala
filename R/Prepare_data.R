@@ -221,14 +221,16 @@ fix_bills <- function(legislator=NULL,party=NULL,vote_data=NULL,legislature=NULL
   leg_resist <- full_join(leg_votes,party_ratio,by='Bill',suffix=c("_leg","_party")) %>% arrange(Bill) %>%
     mutate(agree=(x_leg==x_party)) %>% group_by(agree) %>% arrange(desc(n)) %>% ungroup
 
-  abstain_leg <- leg_resist %>% filter(agree==FALSE, n==max(n),x_leg==2) %>% select(Bill) %>% slice(1) %>% as.character
+  abstain_gov <- leg_resist %>% filter(agree==FALSE, n==max(n),x_leg==2) %>% select(Bill) %>% slice(1) %>% as.character
+  abstain_opp <- leg_resist %>% filter(agree==FALSE, n==max(n),x_leg==2) %>% select(Bill) %>% slice(1) %>% as.character
+
   yes_leg <- leg_resist %>% filter(agree==FALSE,x_leg==max(x_leg,na.rm=TRUE)) %>% filter(n==max(n)) %>% select(Bill) %>% slice(1) %>% as.character
   no_leg <- leg_resist %>% filter(agree==FALSE, x_leg==min(x_leg,na.rm=TRUE)) %>% filter(n==max(n)) %>% select(Bill) %>% slice(1) %>% as.character
-  with_party_leg <- leg_resist %>% filter(agree==TRUE,n==1) %>% slice(1) %>% select(Bill) %>% as.character
+  with_party_yes <- leg_resist %>% filter(agree==TRUE,n==1,x_leg=max(x_leg,na.rm=TRUE)) %>% slice(1) %>% select(Bill) %>% as.character
+  with_party_no <- leg_resist %>% filter(agree==TRUE,n==1,x_leg=min(x_leg,na.rm=TRUE)) %>% slice(1) %>% select(Bill) %>% as.character
 
-
-  final_constraint <- c(abstain_leg,yes_leg,no_leg,with_party_leg)
-  constraint_num <- c(0.5,0,1,-1)
+  final_constraint <- c(abstain_leg,yes_leg,no_leg,with_party_yes,with_party_no)
+  constraint_num <- c(0.5,1,1,-1,-1)
   constraints <- tibble(final_constraint=final_constraint,constraint_num=constraint_num) %>% filter(grepl("Bill",final_constraint))
   return(constraints)
 }
@@ -267,8 +269,15 @@ plot_IRT <- function(cleaned=NULL,stan_obj=NULL,legislature=NULL) {
   if(!is.null(legislature)) {
     cleaned <- cleaned[[legislature]]
   }
+  # combine estimates with vote data and plot. Order by posterior means
   legis_means <- bind_cols(legis_means,cleaned) %>% rename(estimate=`mean`)
-  legis_means <- arrange(legis_means,estimate) %>% mutate(lowci=abs(estimate-`2.5%`),highci=abs(estimate-`97.5%`),
-                                                          totalci=lowci+highci)
-  plot_ly(legis_means,x=~estimate,y=~legis.names) %>% add_markers(error_x=~list(arrayminus=lowci,array=highci))
+  legis_means %<>% arrange(desc(estimate)) %>% mutate(lowci=abs(estimate-`2.5%`),highci=abs(estimate-`97.5%`),
+                                                      legis.names=factor(legis.names,levels=legis.names))
+
+  plot_ly(legis_means,x=~estimate,y=~legis.names,color=~factor(bloc)) %>%
+    add_markers(error_x=~list(arrayminus=lowci,array=highci)) %>%
+    layout(title="Latent Positions of Tunisian MPs",
+           yaxis=~list(ticks="",title="",showticklabels = FALSE),
+           xaxis=~list(title="Latent Positions"))
+
 }

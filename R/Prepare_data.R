@@ -214,23 +214,24 @@ fix_bills <- function(legislator=NULL,party=NULL,vote_data=NULL,legislature=NULL
     gather(variable,amount,-Bill)  %>% filter(variable %in% c("n","x"))  %>% mutate(amount=as.numeric(amount)) %>%
     spread(variable,amount)
 
-
   # Use the ratios of party votes for each piece of legislation to determine in which votes the reference
   # legislator did not vote with the majority party
 
   leg_resist <- full_join(leg_votes,party_ratio,by='Bill',suffix=c("_leg","_party")) %>% arrange(Bill) %>%
     mutate(agree=(x_leg==x_party)) %>% group_by(agree) %>% arrange(desc(n)) %>% ungroup
 
-  abstain_gov <- leg_resist %>% filter(agree==FALSE, n==max(n),x_leg==2) %>% select(Bill) %>% slice(1) %>% as.character
-  abstain_opp <- leg_resist %>% filter(agree==FALSE, n==max(n),x_leg==2) %>% select(Bill) %>% slice(1) %>% as.character
+  abstain_gov <- leg_resist %>% filter(x_leg==2,x_party==max(x_party,na.rm=TRUE)) %>% filter(n==max(n)) %>%
+    select(Bill) %>% as.character
+  abstain_opp <- leg_resist %>% filter(x_leg==2,x_party==min(x_party,na.rm=TRUE)) %>% filter(n==max(n)) %>%
+    select(Bill) %>% as.character
 
-  yes_leg <- leg_resist %>% filter(agree==FALSE,x_leg==max(x_leg,na.rm=TRUE)) %>% filter(n==max(n)) %>% select(Bill) %>% slice(1) %>% as.character
-  no_leg <- leg_resist %>% filter(agree==FALSE, x_leg==min(x_leg,na.rm=TRUE)) %>% filter(n==max(n)) %>% select(Bill) %>% slice(1) %>% as.character
-  with_party_yes <- leg_resist %>% filter(agree==TRUE,n==1,x_leg=max(x_leg,na.rm=TRUE)) %>% slice(1) %>% select(Bill) %>% as.character
-  with_party_no <- leg_resist %>% filter(agree==TRUE,n==1,x_leg=min(x_leg,na.rm=TRUE)) %>% slice(1) %>% select(Bill) %>% as.character
+  yes_gov <- leg_resist %>% filter(agree==TRUE,x_leg==max(x_leg,na.rm=TRUE)) %>% filter(n==max(n)) %>% select(Bill) %>% slice(1) %>% as.character
+  yes_opp <- leg_resist %>% filter(agree==FALSE,x_leg==max(x_leg,na.rm=TRUE)) %>% filter(n==max(n)) %>% select(Bill) %>% slice(1) %>% as.character
+  no_gov <- leg_resist %>% filter(agree==TRUE, x_leg==min(x_leg,na.rm=TRUE)) %>% filter(n==max(n)) %>% select(Bill) %>% slice(1) %>% as.character
+  no_opp <- leg_resist %>% filter(agree==FALSE, x_leg==min(x_leg,na.rm=TRUE)) %>% filter(n==max(n)) %>% select(Bill) %>% slice(1) %>% as.character
 
-  final_constraint <- c(abstain_leg,yes_leg,no_leg,with_party_yes,with_party_no)
-  constraint_num <- c(0.5,1,1,-1,-1)
+  final_constraint <- c(abstain_gov,abstain_opp,yes_gov,yes_opp,no_gov,no_opp)
+  constraint_num <- c(-0.75,0.75,-0.25,0.25,1,-1)
   constraints <- tibble(final_constraint=final_constraint,constraint_num=constraint_num) %>% filter(grepl("Bill",final_constraint))
   return(constraints)
 }

@@ -12,23 +12,28 @@
 .load_data <- function() {
 
   # Load in new data and also old data on ARP (as new ARP data is not complete with bills + articles)
-  arp_votes <- data.table::fread("data/ARP_votes_all.csv",header=TRUE) %>% as_tibble
+  arp_votes <- data.table::fread(system.file('extdata',"ARP_votes_all.csv",package='bawsala'),
+                                 header=TRUE) %>% as_tibble
   names(arp_votes) <- .change_names(names(arp_votes))
 
-  anc_votes <- data.table::fread('data/ANC_votes.csv',sep=',',header=TRUE,strip.white=TRUE) %>% as_tibble
+  anc_votes <- data.table::fread(system.file('extdata','ANC_votes.csv',package='bawsala'),
+                                 sep=',',header=TRUE,strip.white=TRUE) %>% as_tibble
   names(anc_votes) <- .change_names(names(anc_votes))
 
   # Load ARP bill names and labels, change bill names
-  arp_vote_names <- data.table::fread('data/ARP_votes_names.csv') %>% as_tibble
+  arp_vote_names <- data.table::fread(system.file('extdata','ARP_votes_names.csv',package='bawsala')) %>% as_tibble
 
   # Load ANC bill names and labels
-  anc_vote_names <- data.table::fread('data/ANC_votes_labels.csv',col.names = c('bill.names','bill.id')) %>% as_tibble
+  anc_vote_names <- data.table::fread(system.file('extdata','ANC_votes_labels.csv',package='bawsala'),
+  col.names = c('bill.names','bill.id')) %>% as_tibble
 
   # Load member demographics for ANC and ARP
-  arp_members <- data.table::fread("data/members_ARP.csv",col.names=c('id','legis_names','sex','dob','pob','country','job','jobcat',
+  arp_members <- data.table::fread(system.file('extdata',"members_ARP.csv",package='bawsala'),
+                                   col.names=c('id','legis_names','sex','dob','pob','country','job','jobcat',
                                                           'elec_list','parliament_bloc')) %>% as_tibble
 
-  anc_members <- data.table::fread("data/members_ANC.csv",col.names=c('id','legis_names','sex','dob','pob','country','job',
+  anc_members <- data.table::fread(system.file('extdata',"members_ANC.csv",package='bawsala'),
+                                   col.names=c('id','legis_names','sex','dob','pob','country','job',
                                                           'elec_list','parliament_bloc')) %>% as_tibble
 
   # Attempt a match on ARP/ANC members (fuzzy join)

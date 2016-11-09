@@ -236,6 +236,7 @@ fix_bills <- function(legislator=NULL,party=NULL,vote_data=NULL,legislature=NULL
   no_opp <- leg_resist %>% filter(agree==FALSE, x_leg==min(x_leg,na.rm=TRUE)) %>% filter(n==max(n)) %>% select(Bill) %>% slice(1) %>% as.character
 
   final_constraint <- c(abstain_gov,abstain_opp,yes_gov,yes_opp,no_gov,no_opp)
+  names(final_constraint) <- c('abstain_gov','abstain_opp','yes_gov','yes_opp','no_gov','no_opp')
   constraint_num <- c(-0.75,0.75,-0.25,0.25,1,-1)
   constraints <- tibble(final_constraint=final_constraint,constraint_num=constraint_num) %>% filter(grepl("Bill",final_constraint))
   return(constraints)
@@ -243,12 +244,13 @@ fix_bills <- function(legislator=NULL,party=NULL,vote_data=NULL,legislature=NULL
 
 
 #' @export
-prepare_matrix <- function(cleaned=NULL,legis=1,legislature=NULL,to_fix=NULL,use_both=FALSE) {
+prepare_matrix <- function(cleaned=NULL,legis=1,legislature=NULL,to_fix=NULL,use_both=FALSE,
+                           to_pin_bills=NULL) {
 
   # Move constrained bills to end
 
   cleaned <- lapply(cleaned, function(x) {
-    cols_sel <- to_fix$final_constraint
+    cols_sel <- to_fix$final_constraint[to_pin_bills]
     check_names <- names(x)
     cols_sel <- match(cols_sel,check_names)
     x <- bind_cols(select(x,-cols_sel),select(x,cols_sel))

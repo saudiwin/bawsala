@@ -238,7 +238,8 @@ fix_bills <- function(legislator=NULL,party=NULL,vote_data=NULL,legislature=NULL
   final_constraint <- c(abstain_gov,abstain_opp,yes_gov,yes_opp,no_gov,no_opp)
   names(final_constraint) <- c('abstain_gov','abstain_opp','yes_gov','yes_opp','no_gov','no_opp')
   constraint_num <- c(-0.75,0.75,-0.25,0.25,1,-1)
-  constraints <- tibble(final_constraint=final_constraint,constraint_num=constraint_num) %>% filter(grepl("Bill",final_constraint))
+  constraints <- tibble(final_constraint=final_constraint,constraint_num=constraint_num,
+                        bill_type=names(final_constraint)) %>% filter(grepl("Bill",final_constraint))
   return(constraints)
 }
 

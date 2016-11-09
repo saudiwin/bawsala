@@ -249,9 +249,9 @@ prepare_matrix <- function(cleaned=NULL,legis=1,legislature=NULL,to_fix=NULL,use
                            to_pin_bills=NULL) {
 
   # Move constrained bills to end
-
+  to_fix <- to_fix %>% filter(bill_type %in% to_pin_bills) %>% arrange(bill_type)
   cleaned <- lapply(cleaned, function(x) {
-    cols_sel <- to_fix$final_constraint[to_pin_bills]
+    cols_sel <- to_fix$final_constraint
     check_names <- names(x)
     cols_sel <- match(cols_sel,check_names)
     x <- bind_cols(select(x,-cols_sel),select(x,cols_sel))

@@ -187,15 +187,52 @@ clean_data <- function(keep_legis=1,use_subset=FALSE,subset_party=c("Bloc Al Hor
   return(cleaned)
 }
 
+#' Function to take a roll call data set and the names of opposition and governing parties.
+#' The opposition party should be as extreme in opposition as possible.
+#' This function helps to achieve identification by constraining discrimination parameters.
+#' For bills on which the opposition votes in majority, discrimination is constrained to be
+#' positive.
+#' For bills on which the government votes in majority, discrimination is constrained to be
+#' negative.
+#' For other bills, discrimination is free to float.
+#' @param opp Character, name of opposition party to filter data
+#' @param gov Character, name of governing party to filter data
+#' @param vote_data Voting data in list form, with each element of list equal to a legislature
+#' @param legislature The specific legislature in the list to choose
+#' @export
+fix_bills_discrim <- function(opp=NULL,gov=NULL,vote_data=NULL,legislature=NULL) {
+
+  # Create long rollcall vote datasets filtered by party
+
+  gov_votes <- vote_data[[legislature]] %>% filter(bloc==gov) %>% distinct %>% gather(Bill,amount,matches('Bill'))
+
+  gov_votes <- gov_votes %>% group_by(Bill) %>% summarize(yes=mean(amount==3,na.rm=TRUE),
+                                                          no=mean(amount==1,na.rm=TRUE),
+                                                          abstain=mean(amount==2,na.rm=TRUE)) %>%
+    filter(yes>.8)
+
+  opp_votes <- vote_data[[legislature]] %>% filter(bloc==opp) %>% distinct %>% gather(Bill,amount,matches("Bill"))
+
+  opp_votes <- opp_votes %>% group_by(Bill) %>% summarize(yes=mean(amount==3,na.rm=TRUE),
+                                                          no=mean(amount==1,na.rm=TRUE),
+                                                          abstain=mean(amount==2,na.rm=TRUE)) %>%
+    filter(yes>.8)
+
+  return(list(gov=gov_votes$Bill,opp=opp_votes$Bill))
+
+}
+
 
 #' Function to take a data set, a legislator name, a majority party, and find bills to fix positions
+#' By fixing bills compared to the reference legislator. This type of identification has not performed well so
+#' far.
 #' @param legislator Character string of the name of the legislator to use as a reference (ideal point fixed at 0)
 #' @param party Character string of the majority party in the legislature (will be used to determine reference legislator's ideal points on bills)
 #' @param party_data Data frame with all of the party and demographic information for legislators in both legislatures
 #' @param vote_data Data frame with all of the votes for the particular legislature of analysis
 #' @export
 #' @import tidyr
-fix_bills <- function(legislator=NULL,party=NULL,vote_data=NULL,legislature=NULL) {
+fix_bills_refleg <- function(legislator=NULL,party=NULL,vote_data=NULL,legislature=NULL) {
 
   # Pull ref legislator votes and majority party votes
 
@@ -245,17 +282,33 @@ fix_bills <- function(legislator=NULL,party=NULL,vote_data=NULL,legislature=NULL
 
 
 #' @export
-prepare_matrix <- function(cleaned=NULL,legis=1,legislature=NULL,to_fix=NULL,use_both=FALSE,
+prepare_matrix <- function(cleaned=NULL,legis=1,legislature=NULL,to_fix=NULL,to_fix_type=NULL,
+                           use_both=FALSE,
                            to_pin_bills=NULL) {
 
-  # Move constrained bills to end
-  to_fix <- to_fix %>% filter(bill_type %in% to_pin_bills) %>% arrange(bill_type)
-  cleaned <- lapply(cleaned, function(x) {
-    cols_sel <- to_fix$final_constraint
-    check_names <- names(x)
-    cols_sel <- match(cols_sel,check_names)
-    x <- bind_cols(select(x,-cols_sel),select(x,cols_sel))
-  })
+  if(to_fix_type=='ref_bills') {
+    # Move constrained bills to end
+    to_fix <- to_fix %>% filter(bill_type %in% to_pin_bills) %>% arrange(bill_type)
+    cleaned <- lapply(cleaned, function(x) {
+      cols_sel <- to_fix$final_constraint
+      check_names <- names(x)
+      cols_sel <- match(cols_sel,check_names)
+      x <- bind_cols(select(x,-cols_sel),select(x,cols_sel))
+    })
+  } else if(to_fix_type=='ref_discrim') {
+    #need to match three subsets of bills: opp, gov and split
+    cleaned <- lapply(cleaned, function(x) {
+      check_names <- names(x)
+      cols_sel_opp <- match(to_fix$opp,check_names)
+      cols_sel_gov <- match(to_fix$gov,check_names)
+      x <- bind_cols(select(x,-c(cols_sel_gov,cols_sel_opp)),select(x,c(cols_sel_gov,cols_sel_opp)))
+      return(list(data=x,opp_num=length(cols_sel_opp),gov_num=length(cols_sel_gov)))
+    })
+      opp_num <- cleaned[[legislature]]$opp_num
+      gov_num <- cleaned[[legislature]]$gov_num
+      cleaned <- lapply(cleaned,function(x) x$data)
+      names(cleaned) <- c("arp_votes",'anc_votes')
+  }
 
   if(use_both==TRUE) {
     cleaned %<>% rbind_row(cleaned)
@@ -265,14 +318,14 @@ prepare_matrix <- function(cleaned=NULL,legis=1,legislature=NULL,to_fix=NULL,use
   vote_matrix <- cleaned[[legislature]] %>% select(matches("Bill")) %>% as.matrix
   }
 
-  return(vote_matrix)
+  return(list(votes=vote_matrix,opp_num=opp_num,gov_num=gov_num))
 }
 
 #' @import plotly
 #' @export
-plot_IRT <- function(cleaned=NULL,stan_obj=NULL,legislature=NULL) {
+plot_IRT <- function(cleaned=NULL,stan_obj=NULL,legislature=NULL,plot_param=NULL) {
   means_fit <- rstan::summary(sample_fit)[[1]]
-  legis_means <- as_tibble(means_fit[grepl("L_open\\[",row.names(means_fit)),])
+  legis_means <- as_tibble(means_fit[grepl(paste0(plot_param,"\\["),row.names(means_fit)),])
 
   # Only need to use the specific legislature of interest for plotting
   if(!is.null(legislature)) {

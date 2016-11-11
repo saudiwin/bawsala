@@ -218,6 +218,13 @@ fix_bills_discrim <- function(opp=NULL,gov=NULL,vote_data=NULL,legislature=NULL)
                                                           abstain=mean(amount==2,na.rm=TRUE)) %>%
     filter(yes>.8)
 
+  #remove any bills that both opp and gov voted for
+  to_remove <- opp_votes$Bill[opp_votes$Bill %in% gov_votes$Bill]
+
+  opp_votes <- opp_votes %>% filter(!(Bill %in% to_remove))
+
+  gov_votes <- gov_votes %>% filter(!(Bill %in% to_remove))
+
   return(list(gov=gov_votes$Bill,opp=opp_votes$Bill))
 
 }
@@ -296,7 +303,7 @@ prepare_matrix <- function(cleaned=NULL,legis=1,legislature=NULL,to_fix=NULL,to_
       x <- bind_cols(select(x,-cols_sel),select(x,cols_sel))
     })
   } else if(to_fix_type=='ref_discrim') {
-    #need to match three subsets of bills: opp, gov and split
+
     cleaned <- lapply(cleaned, function(x) {
       check_names <- names(x)
       cols_sel_opp <- match(to_fix$opp,check_names)

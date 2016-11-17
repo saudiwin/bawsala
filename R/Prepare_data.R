@@ -134,7 +134,8 @@ clean_data <- function(keep_legis=1,use_subset=FALSE,subset_party=c("Bloc Al Hor
       x <- x %>%  mutate_at(vars(starts_with("Bill")),funs(factor(.,levels = c("contre",'abstenu',NA,'pour')) %>%
                                                              as.integer))
       if(use_nas==TRUE) {
-        x <- x %>%  mutate_at(vars(starts_with("Bill")),funs(recode(.,`3`=4,`NA`=3)))
+        x %>% mutate_at(vars(starts_with("Bill")),
+                        funs(recode(., `3` = 4L,.missing=3L)))
       }
       return(x)
     })
@@ -359,7 +360,7 @@ prepare_matrix <- function(cleaned=NULL,legis=1,legislature=NULL,to_fix=NULL,to_
         cols_sel_opp <- NULL
         cols_sel_nobill <- NULL
       }
-      x <- bind_cols(select(x,-c(cols_sel_gov,cols_sel_opp,cols_sel_nobill)),select(x,c(cols_sel_gov,cols_sel_opp,cols_sel_nobill)))
+      x <- bind_cols(select(x,-c(cols_sel_opp,cols_sel_gov)),select(x,c(cols_sel_opp,cols_sel_gov)))
       return(list(data=x,opp_num=length(cols_sel_opp),gov_num=length(cols_sel_gov)))
     })
       opp_num <- cleaned[[legislature]]$opp_num

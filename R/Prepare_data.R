@@ -93,11 +93,13 @@
 #' @param use_nas TRUE/FALSE For ordinal data, whether absences should be coded as a separate category (TRUE) or coded as NA (FALSE)
 #' @param to_run Which of the datasets to use in the analysis. Put 1 for binary yes/no, 2 for binary yes/no v. abstain, 3 for ordinal
 #' @param sample_it Whether to use a sample of the dataset for analysis. Useful for testing models.
+#' @param sample_amt Integer number of legislators to sample from dataset
 #' @import dplyr tibble ggplot2 magrittr
 #' @export
 clean_data <- function(keep_legis=1,use_subset=FALSE,subset_party=c("Bloc Al Horra","Mouvement Nidaa Tounes"),
                       use_both=FALSE,refleg="ARP_Bochra Belhaj Hamida",
-                      legis=1,use_vb=FALSE,use_nas=FALSE,to_run=3,sample_it=FALSE) {
+                      legis=1,use_vb=FALSE,use_nas=FALSE,to_run=3,sample_it=FALSE,
+                      sample_amt=50) {
 
   # Need to read-in all the data
 
@@ -154,8 +156,14 @@ clean_data <- function(keep_legis=1,use_subset=FALSE,subset_party=c("Bloc Al Hor
 
   if(sample_it==TRUE) {
     cleaned <- lapply(cleaned,function(x) {
-      x <-    x %>% sample_n(15) %>% select_(~sample(ncol(x),size=150))
-      x
+      if(nrow(x)>sample_amt) {
+      x <-    x %>% sample_n(sample_amt)
+      }
+      all_bills <-  grep('Bill',names(x),value=TRUE)
+      bills_sample <- sample(all_bills,100)
+      bills_sample <- match(bills_sample,names(x))
+      x %<>% select(id,legis.names,bloc,type,bills_sample)
+      return(x)
     })
 
 
@@ -205,19 +213,29 @@ fix_bills_discrim <- function(opp=NULL,gov=NULL,vote_data=NULL,legislature=NULL)
 
   # Create long rollcall vote datasets filtered by party
 
-  gov_votes <- vote_data[[legislature]] %>% filter(bloc==gov) %>% distinct %>% gather(Bill,amount,matches('Bill'))
+  gov_votes <- vote_data[[legislature]] %>% filter(bloc==gov) %>% distinct
+
+  ngov <- nrow(gov_votes)
+
+  gov_votes %<>% gather(Bill,amount,matches('Bill'))
 
   gov_votes <- gov_votes %>% group_by(Bill) %>% summarize(yes=mean(amount==3,na.rm=TRUE),
                                                           no=mean(amount==1,na.rm=TRUE),
-                                                          abstain=mean(amount==2,na.rm=TRUE)) %>%
-    filter(yes>.8)
+                                                          abstain=mean(amount==2,na.rm=TRUE),
+                                                          quorum=sum(amount==3,na.rm=TRUE)/ngov) %>%
+    filter(yes>.8, quorum>.6)
 
-  opp_votes <- vote_data[[legislature]] %>% filter(bloc==opp) %>% distinct %>% gather(Bill,amount,matches("Bill"))
+  opp_votes <- vote_data[[legislature]] %>% filter(bloc==opp) %>% distinct
+
+  nopp <- nrow(opp_votes)
+
+  opp_votes %<>% gather(Bill,amount,matches("Bill"))
 
   opp_votes <- opp_votes %>% group_by(Bill) %>% summarize(yes=mean(amount==3,na.rm=TRUE),
                                                           no=mean(amount==1,na.rm=TRUE),
-                                                          abstain=mean(amount==2,na.rm=TRUE)) %>%
-    filter(yes>.8)
+                                                          abstain=mean(amount==2,na.rm=TRUE),
+                                                          quorum=sum(amount==3,na.rm=TRUE)/nopp) %>%
+    filter(yes>.8,quorum>.6)
 
   #remove any bills that both opp and gov voted for
   to_remove <- opp_votes$Bill[opp_votes$Bill %in% gov_votes$Bill]
@@ -225,6 +243,12 @@ fix_bills_discrim <- function(opp=NULL,gov=NULL,vote_data=NULL,legislature=NULL)
   opp_votes <- opp_votes %>% filter(!(Bill %in% to_remove))
 
   gov_votes <- gov_votes %>% filter(!(Bill %in% to_remove))
+
+  # Figure out bill to set at discrimination zero: these are bills that are not loading in either dimension very well
+
+  vote_data[[legislature]] %>% gather(bill_num,bill_vote,matches('Bill')) %>%
+    group_by(bill_num) %>% summarize(num_miss=sum(is.na(bill_vote)),nos=mean(bill_vote==1,na.rm=TRUE)/num_miss) %>%
+    arrange(-nos)
 
   return(list(gov=gov_votes$Bill,opp=opp_votes$Bill))
 

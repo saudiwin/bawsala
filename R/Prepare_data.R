@@ -208,7 +208,7 @@ clean_data <- function(keep_legis=1,use_subset=FALSE,subset_party=c("Bloc Al Hor
 #' @param vote_data Voting data in list form, with each element of list equal to a legislature
 #' @param legislature The specific legislature in the list to choose
 #' @export
-fix_bills_discrim <- function(opp=NULL,gov=NULL,vote_data=NULL,legislature=NULL) {
+fix_bills_discrim <- function(opp=NULL,gov=NULL,vote_data=NULL,legislature=NULL,to_run=NULL,use_nas==NULL) {
 
   # Create long rollcall vote datasets filtered by party
 
@@ -217,25 +217,47 @@ fix_bills_discrim <- function(opp=NULL,gov=NULL,vote_data=NULL,legislature=NULL)
   ngov <- nrow(gov_votes)
 
   gov_votes %<>% gather(Bill,amount,matches('Bill'))
-
+  if(to_run==3 & use_nas==FALSE) {
   gov_votes <- gov_votes %>% group_by(Bill) %>% summarize(yes=mean(amount==3,na.rm=TRUE),
                                                           no=mean(amount==1,na.rm=TRUE),
                                                           abstain=mean(amount==2,na.rm=TRUE),
                                                           quorum=sum(amount==3,na.rm=TRUE)/ngov) %>%
     filter(yes>.8, quorum>.6)
-
+  } else if(to_run==3 & use_nas==TRUE {
+    gov_votes <- gov_votes %>% group_by(Bill) %>% summarize(yes=mean(amount==4,na.rm=TRUE),
+                                                            no=mean(amount==1,na.rm=TRUE),
+                                                            abstain=mean(amount==2,na.rm=TRUE),
+                                                            quorum=sum(amount==4,na.rm=TRUE)/ngov) %>%
+      filter(yes>.8, quorum>.6)
+    }else {
+    gov_votes <- gov_votes %>% group_by(Bill) %>% summarize(yes=mean(amount==1,na.rm=TRUE),
+                                                            no=mean(amount==0,na.rm=TRUE)
+                                                            quorum=sum(amount==1,na.rm=TRUE)/ngov) %>%
+      filter(yes>.8, quorum>.6)
+}
   opp_votes <- vote_data[[legislature]] %>% filter(bloc==opp) %>% distinct
 
   nopp <- nrow(opp_votes)
 
   opp_votes %<>% gather(Bill,amount,matches("Bill"))
-
+  if(to_run==3 & use_nas==FALSE) {
   opp_votes <- opp_votes %>% group_by(Bill) %>% summarize(yes=mean(amount==3,na.rm=TRUE),
                                                           no=mean(amount==1,na.rm=TRUE),
                                                           abstain=mean(amount==2,na.rm=TRUE),
                                                           quorum=sum(amount==3,na.rm=TRUE)/nopp) %>%
     filter(yes>.8,quorum>.6)
-
+  } else if(to_run==3 & use_nas==TRUE) {
+    opp_votes <- opp_votes %>% group_by(Bill) %>% summarize(yes=mean(amount==4,na.rm=TRUE),
+                                                            no=mean(amount==1,na.rm=TRUE),
+                                                            abstain=mean(amount==2,na.rm=TRUE),
+                                                            quorum=sum(amount==4,na.rm=TRUE)/nopp) %>%
+    filter(yes>.8,quorum>.6)
+  } else {
+    opp_votes <- opp_votes %>% group_by(Bill) %>% summarize(yes=mean(amount==1,na.rm=TRUE),
+                                                            no=mean(amount==0,na.rm=TRUE),
+                                                            quorum=sum(amount==1,na.rm=TRUE)/nopp) %>%
+      filter(yes>.8,quorum>.6)
+}
   #remove any bills that both opp and gov voted for
   to_remove <- opp_votes$Bill[opp_votes$Bill %in% gov_votes$Bill]
 
@@ -245,11 +267,11 @@ fix_bills_discrim <- function(opp=NULL,gov=NULL,vote_data=NULL,legislature=NULL)
 
   # Figure out bill to set at discrimination zero: these are bills that are not loading in either dimension very well
 
-  vote_data[[legislature]] %>% gather(bill_num,bill_vote,matches('Bill')) %>%
+ no_bill <-  vote_data[[legislature]] %>% gather(bill_num,bill_vote,matches('Bill')) %>%
     group_by(bill_num) %>% summarize(num_miss=sum(is.na(bill_vote)),nos=mean(bill_vote==1,na.rm=TRUE)/num_miss) %>%
     arrange(-nos)
 
-  return(list(gov=gov_votes$Bill,opp=opp_votes$Bill))
+  return(list(gov=gov_votes$Bill,opp=opp_votes$Bill,no_bill=no_bill$bill_num[1]))
 
 }
 
@@ -315,7 +337,7 @@ fix_bills_refleg <- function(legislator=NULL,party=NULL,vote_data=NULL,legislatu
 #' @export
 prepare_matrix <- function(cleaned=NULL,legis=1,legislature=NULL,to_fix=NULL,to_fix_type=NULL,
                            use_both=FALSE,
-                           to_pin_bills=NULL) {
+                           to_pin_bills=NULL,only_gov=TRUE) {
 
   if(to_fix_type=='ref_bills') {
     # Move constrained bills to end
@@ -327,18 +349,23 @@ prepare_matrix <- function(cleaned=NULL,legis=1,legislature=NULL,to_fix=NULL,to_
       x <- bind_cols(select(x,-cols_sel),select(x,cols_sel))
     })
   } else if(to_fix_type=='ref_discrim') {
-
+    names_cleaned <- names(cleaned)
     cleaned <- lapply(cleaned, function(x) {
       check_names <- names(x)
       cols_sel_opp <- match(to_fix$opp,check_names)
       cols_sel_gov <- match(to_fix$gov,check_names)
-      x <- bind_cols(select(x,-c(cols_sel_gov,cols_sel_opp)),select(x,c(cols_sel_gov,cols_sel_opp)))
+      cols_sel_nobill <- match(to_fix$no_bill,check_names)
+      if(only_gov==TRUE) {
+        cols_sel_opp <- NULL
+        cols_sel_nobill <- NULL
+      }
+      x <- bind_cols(select(x,-c(cols_sel_gov,cols_sel_opp,cols_sel_nobill)),select(x,c(cols_sel_gov,cols_sel_opp,cols_sel_nobill)))
       return(list(data=x,opp_num=length(cols_sel_opp),gov_num=length(cols_sel_gov)))
     })
       opp_num <- cleaned[[legislature]]$opp_num
       gov_num <- cleaned[[legislature]]$gov_num
       cleaned <- lapply(cleaned,function(x) x$data)
-      names(cleaned) <- c("arp_votes",'anc_votes')
+      names(cleaned) <- names_cleaned
   }
 
   if(use_both==TRUE) {
@@ -354,7 +381,7 @@ prepare_matrix <- function(cleaned=NULL,legis=1,legislature=NULL,to_fix=NULL,to_
 
 #' @import plotly
 #' @export
-plot_IRT <- function(cleaned=NULL,stan_obj=NULL,legislature=NULL,plot_param=NULL) {
+plot_IRT <- function(cleaned=NULL,stan_obj=NULL,legislature=NULL,plot_param=NULL,true_params='none') {
   means_fit <- rstan::summary(sample_fit)[[1]]
   legis_means <- as_tibble(means_fit[grepl(paste0(plot_param,"\\["),row.names(means_fit)),])
 
@@ -365,12 +392,18 @@ plot_IRT <- function(cleaned=NULL,stan_obj=NULL,legislature=NULL,plot_param=NULL
   # combine estimates with vote data and plot. Order by posterior means
   legis_means <- bind_cols(legis_means,cleaned) %>% rename(estimate=`mean`)
   legis_means %<>% arrange(desc(estimate)) %>% mutate(lowci=abs(estimate-`2.5%`),highci=abs(estimate-`97.5%`),
-                                                      legis.names=factor(legis.names,levels=legis.names))
+                                                      legis.names=factor(legis.names,levels=legis.names),
+                                                      true_params=true_params)
 
-  plot_ly(legis_means,x=~estimate,y=~legis.names,color=~factor(bloc)) %>%
+  outplot <- plot_ly(legis_means,x=~estimate,y=~legis.names,color=~factor(bloc)) %>%
     add_markers(error_x=~list(arrayminus=lowci,array=highci)) %>%
     layout(title="Latent Positions of Tunisian MPs",
            yaxis=~list(ticks="",title="",showticklabels = FALSE),
            xaxis=~list(title="Latent Positions"))
 
+  if(true_params!='none') {
+
+    outplot %<>% add_markers(x=~true_params,y=~legis.names,color="red",symbols='x')
+  }
+  return(outplot)
 }

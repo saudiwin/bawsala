@@ -7,7 +7,8 @@
 clean_data(keep_legis = 1, use_subset = FALSE,
   subset_party = c("Bloc Al Horra", "Mouvement Nidaa Tounes"),
   use_both = FALSE, refleg = "ARP_Bochra Belhaj Hamida", legis = 1,
-  use_vb = FALSE, use_nas = FALSE, to_run = 3, sample_it = FALSE)
+  use_vb = FALSE, use_nas = FALSE, to_run = 3, sample_it = FALSE,
+  sample_amt = 50)
 }
 \arguments{
 \item{keep_legis}{Number of legislator votes required to keep them in the dataset}
@@ -27,6 +28,8 @@ clean_data(keep_legis = 1, use_subset = FALSE,
 \item{to_run}{Which of the datasets to use in the analysis. Put 1 for binary yes/no, 2 for binary yes/no v. abstain, 3 for ordinal}
 
 \item{sample_it}{Whether to use a sample of the dataset for analysis. Useful for testing models.}
+
+\item{sample_amt}{Integer number of legislators to sample from dataset}
 
 \item{if}{use_subset==TRUE, a vector of party bloc names with which to subset the data}
 }

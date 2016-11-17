@@ -333,7 +333,7 @@ prepare_matrix <- function(cleaned=NULL,legis=1,legislature=NULL,to_fix=NULL,to_
       check_names <- names(x)
       cols_sel_opp <- match(to_fix$opp,check_names)
       cols_sel_gov <- match(to_fix$gov,check_names)
-      x <- bind_cols(select(x,-c(cols_sel_gov,cols_sel_opp)),select(x,c(cols_sel_gov,cols_sel_opp)))
+      x <- bind_cols(select(x,-c(cols_sel_opp,cols_sel_gov)),select(x,c(cols_sel_opp,cols_sel_gov)))
       return(list(data=x,opp_num=length(cols_sel_opp),gov_num=length(cols_sel_gov)))
     })
       opp_num <- cleaned[[legislature]]$opp_num

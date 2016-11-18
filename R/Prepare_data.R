@@ -209,7 +209,7 @@ clean_data <- function(keep_legis=1,use_subset=FALSE,subset_party=c("Bloc Al Hor
 #' @param vote_data Voting data in list form, with each element of list equal to a legislature
 #' @param legislature The specific legislature in the list to choose
 #' @export
-fix_bills_discrim <- function(opp=NULL,gov=NULL,vote_data=NULL,legislature=NULL,to_run=NULL,use_nas==NULL) {
+fix_bills_discrim <- function(opp=NULL,gov=NULL,vote_data=NULL,legislature=NULL,to_run=NULL,use_nas=NULL) {
 
   # Create long rollcall vote datasets filtered by party
 
@@ -224,7 +224,7 @@ fix_bills_discrim <- function(opp=NULL,gov=NULL,vote_data=NULL,legislature=NULL,
                                                           abstain=mean(amount==2,na.rm=TRUE),
                                                           quorum=sum(amount==3,na.rm=TRUE)/ngov) %>%
     filter(yes>.8, quorum>.6)
-  } else if(to_run==3 & use_nas==TRUE {
+  } else if(to_run==3 & use_nas==TRUE) {
     gov_votes <- gov_votes %>% group_by(Bill) %>% summarize(yes=mean(amount==4,na.rm=TRUE),
                                                             no=mean(amount==1,na.rm=TRUE),
                                                             abstain=mean(amount==2,na.rm=TRUE),
@@ -232,7 +232,7 @@ fix_bills_discrim <- function(opp=NULL,gov=NULL,vote_data=NULL,legislature=NULL,
       filter(yes>.8, quorum>.6)
     }else {
     gov_votes <- gov_votes %>% group_by(Bill) %>% summarize(yes=mean(amount==1,na.rm=TRUE),
-                                                            no=mean(amount==0,na.rm=TRUE)
+                                                            no=mean(amount==0,na.rm=TRUE),
                                                             quorum=sum(amount==1,na.rm=TRUE)/ngov) %>%
       filter(yes>.8, quorum>.6)
 }

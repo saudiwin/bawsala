@@ -134,7 +134,7 @@ clean_data <- function(keep_legis=1,use_subset=FALSE,subset_party=c("Bloc Al Hor
       x <- x %>%  mutate_at(vars(starts_with("Bill")),funs(factor(.,levels = c("contre",'abstenu',NA,'pour')) %>%
                                                              as.integer))
       if(use_nas==TRUE) {
-        x %>% mutate_at(vars(starts_with("Bill")),
+        x %<>% mutate_at(vars(starts_with("Bill")),
                         funs(recode(., `3` = 4L,.missing=3L)))
       }
       return(x)

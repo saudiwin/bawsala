@@ -169,20 +169,35 @@ clean_data <- function(keep_legis=1,use_subset=FALSE,subset_party=c("Bloc Al Hor
 
   }
 
-  # Should be at least two types of votes per bill
-
-  cleaned <- cleaned %>% lapply(function(y) {
-    orig <- y %>% select(-matches("Bill"))
-    y <- y %>% select(matches("Bill"))
-    y <- y %>%  select_if(function(x) {
-      if(length(table(x))<2) {
-        FALSE
-      } else {
-        TRUE
-      }
+  # Should be at least two types of votes per bill for ordinal & binary, three types for ordinal with more than
+  # 3 categories
+  if(use_nas==FALSE) {
+    cleaned <- cleaned %>% lapply(function(y) {
+      orig <- y %>% select(-matches("Bill"))
+      y <- y %>% select(matches("Bill"))
+      y <- y %>%  select_if(function(x) {
+        if(length(table(x))<2) {
+          FALSE
+        } else {
+          TRUE
+        }
+      })
+      orig <- bind_cols(orig,y)
     })
-    orig <- bind_cols(orig,y)
-  })
+  } else if(use_nas==TRUE) {
+    cleaned <- cleaned %>% lapply(function(y) {
+      orig <- y %>% select(-matches("Bill"))
+      y <- y %>% select(matches("Bill"))
+      y <- y %>%  select_if(function(x) {
+        if(length(table(x))<3) {
+          FALSE
+        } else {
+          TRUE
+        }
+      })
+      orig <- bind_cols(orig,y)
+    })
+  }
 
     # Reorder based on reference legislator
 

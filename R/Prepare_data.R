@@ -350,10 +350,40 @@ fix_bills_refleg <- function(legislator=NULL,party=NULL,vote_data=NULL,legislatu
 }
 
 
+
+#' Accepting already cleaned data, this function will split the outcome variable into a no --> abstain --> yes (1,2,3) component
+#' And a absent/party votes no --> absent/party split --> absent/party votes yes (4,5,6)
+#' The intention is to enable separate modeling of these two types of responses to legislative votes
+split_absences <- function(cleaned=NULL) {
+
+  #simple function to change the votes with new vectors
+  change_votes <- function(vote=NULL,yes=NULL,no=NULL) {
+    vote_new <- vote
+    vote[vote==3 & yes>.6] <- 6
+    vote[vote==3 & no>.6] <- 4
+    vote[vote==3 & (yes<.6 & no<.6)] <- 5
+    vote[vote_new==4] <- 3
+    return(vote)
+  }
+
+
+  lapply(cleaned, function(x) {
+    bloc_bill <- gather(x,bill,vote,-bloc,-legis.names,-id,-type) %>%
+      group_by(bloc,bill) %>% mutate(yes=sum(vote==4)/length(bloc),no=sum(vote==1)/length(bloc))
+
+    bloc_bill <- bloc_bill %>% mutate(vote_orig=vote,vote=change_votes(vote,yes,no)) %>%
+      ungroup %>% select(id,legis.names,bloc,type,bill,vote) %>% spread(key=bill,value=vote)
+
+    return(bloc_bill)
+
+  })
+}
+
+
 #' @export
 prepare_matrix <- function(cleaned=NULL,legis=1,legislature=NULL,to_fix=NULL,to_fix_type=NULL,
                            use_both=FALSE,
-                           to_pin_bills=NULL,only_gov=TRUE) {
+                           to_pin_bills=NULL,only_gov=TRUE,split_absences=FALSE,to_run=NULL,use_nas=NULL) {
 
   if(to_fix_type=='ref_bills') {
     # Move constrained bills to end
@@ -384,9 +414,20 @@ prepare_matrix <- function(cleaned=NULL,legis=1,legislature=NULL,to_fix=NULL,to_
       names(cleaned) <- names_cleaned
   }
 
+  # Split absences into three underlying categories based on how legislators voted
+  if(split_absences==TRUE) {
+    if(to_run<3) {
+      stop("Splitting absences is only for ordinal data. Please re-run with to_run set to 3.")
+    }
+    if(use_nas==FALSE) {
+      stop("Splitting absences requires cleaned ordinal data with absences as a separate category. Please set use-nas to TRUE.")
+    }
+    cleaned <- split_absences(cleaned)
+  }
+
   if(use_both==TRUE) {
     cleaned %<>% rbind_row(cleaned)
-    vote_matrix <- cleaned %>% as.matrix
+    vote_matrix <- cleaned %>% select(matches('Bill')) %>% as.matrix
   } else {
 
   vote_matrix <- cleaned[[legislature]] %>% select(matches("Bill")) %>% as.matrix

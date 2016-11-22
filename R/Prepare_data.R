@@ -368,7 +368,10 @@ split_absences <- function(cleaned=NULL) {
 
 
   lapply(cleaned, function(x) {
-    bloc_bill <- gather(x,bill,vote,-bloc,-legis.names,-id,-type) %>%
+    if(length(grep('Bill',names(x),value=TRUE))==0) {
+      return(x)
+    }
+    bloc_bill <- gather(x,bill,vote,matches('Bill')) %>%
       group_by(bloc,bill) %>% mutate(yes=sum(vote==4)/length(bloc),no=sum(vote==1)/length(bloc))
 
     bloc_bill <- bloc_bill %>% mutate(vote_orig=vote,vote=change_votes(vote,yes,no)) %>%
@@ -438,7 +441,8 @@ prepare_matrix <- function(cleaned=NULL,legis=1,legislature=NULL,to_fix=NULL,to_
 
 #' @import plotly
 #' @export
-plot_IRT <- function(cleaned=NULL,stan_obj=NULL,legislature=NULL,plot_param=NULL,true_params='none') {
+plot_IRT <- function(cleaned=NULL,stan_obj=NULL,legislature=NULL,plot_param=NULL,true_params='none',
+                     ggplot=FALSE) {
   means_fit <- rstan::summary(sample_fit)[[1]]
   legis_means <- as_tibble(means_fit[grepl(paste0(plot_param,"\\["),row.names(means_fit)),])
 
@@ -448,19 +452,29 @@ plot_IRT <- function(cleaned=NULL,stan_obj=NULL,legislature=NULL,plot_param=NULL
   }
   # combine estimates with vote data and plot. Order by posterior means
   legis_means <- bind_cols(legis_means,cleaned) %>% rename(estimate=`mean`)
+
   legis_means %<>% arrange(desc(estimate)) %>% mutate(lowci=abs(estimate-`2.5%`),highci=abs(estimate-`97.5%`),
                                                       legis.names=factor(legis.names,levels=legis.names),
                                                       true_params=true_params)
+  if(ggplot==FALSE) {
+    outplot <- plot_ly(legis_means,x=~estimate,y=~legis.names,color=~factor(bloc)) %>%
+      add_markers(error_x=~list(arrayminus=lowci,array=highci)) %>%
+      layout(title="Latent Positions of Tunisian MPs",
+             yaxis=~list(ticks="",title="",showticklabels = FALSE),
+             xaxis=~list(title="Latent Positions"))
 
-  outplot <- plot_ly(legis_means,x=~estimate,y=~legis.names,color=~factor(bloc)) %>%
-    add_markers(error_x=~list(arrayminus=lowci,array=highci)) %>%
-    layout(title="Latent Positions of Tunisian MPs",
-           yaxis=~list(ticks="",title="",showticklabels = FALSE),
-           xaxis=~list(title="Latent Positions"))
+    if(true_params!='none') {
 
-  if(true_params!='none') {
+      outplot %<>% add_markers(x=~true_params,y=~legis.names,color="red",symbols='x')
+    }
+  } else {
+    outplot <- ggplot(legis_means,aes(x=estimate,y=reorder(legis.names,estimate),color=bloc)) + theme_minmal() +
+      geom_point() + geom_errorbarh(xmin=lowci,xmax=highci)
 
-    outplot %<>% add_markers(x=~true_params,y=~legis.names,color="red",symbols='x')
+    if(true_params!='none') {
+
+      outplot %<>% geom_point(aes(x=true_params,y=reorder(legis.names,estimate)),color="red")
+    }
   }
   return(outplot)
 }

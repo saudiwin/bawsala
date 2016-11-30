@@ -354,7 +354,7 @@ fix_bills_refleg <- function(legislator=NULL,party=NULL,vote_data=NULL,legislatu
 #' Accepting already cleaned data, this function will split the outcome variable into a no --> abstain --> yes (1,2,3) component
 #' And a absent/party votes no --> absent/party split --> absent/party votes yes (4,5,6)
 #' The intention is to enable separate modeling of these two types of responses to legislative votes
-split_absences <- function(cleaned=NULL) {
+split_absences <- function(cleaned=NULL,to_fix=NULL) {
 
   #simple function to change the votes with new vectors
   change_votes <- function(vote=NULL,yes=NULL,no=NULL) {
@@ -367,7 +367,7 @@ split_absences <- function(cleaned=NULL) {
   }
 
 
-  lapply(cleaned, function(x) {
+  lapply(cleaned, function(x,refbill=NULL) {
     if(length(grep('Bill',names(x),value=TRUE))==0) {
       return(x)
     }
@@ -377,16 +377,22 @@ split_absences <- function(cleaned=NULL) {
     bloc_bill <- bloc_bill %>% mutate(vote_orig=vote,vote=change_votes(vote,yes,no)) %>%
       ungroup %>% select(id,legis.names,bloc,type,bill,vote) %>% spread(key=bill,value=vote) %>% arrange(legis.names)
 
+    if(refbill %in% names(bloc_bill)) {
+      bloc_bill <- select(bloc_bill,-one_of_col(refbill),one_of_col(refbill))
+    }
+
     return(bloc_bill)
 
-  })
+  },refbill=to_fix)
 }
 
 
 #' @export
 prepare_matrix <- function(cleaned=NULL,legis=1,legislature=NULL,to_fix=NULL,to_fix_type=NULL,
                            use_both=FALSE,
-                           to_pin_bills=NULL,only_gov=TRUE,split_absences=FALSE,to_run=NULL,use_nas=NULL) {
+                           to_pin_bills=NULL,
+                           absent_bill=NULL,
+                           only_gov=TRUE,split_absences=FALSE,to_run=NULL,use_nas=NULL) {
 
   if(to_fix_type=='ref_bills') {
     # Move constrained bills to end
@@ -425,7 +431,7 @@ prepare_matrix <- function(cleaned=NULL,legis=1,legislature=NULL,to_fix=NULL,to_
     if(use_nas==FALSE) {
       stop("Splitting absences requires cleaned ordinal data with absences as a separate category. Please set use-nas to TRUE.")
     }
-    cleaned <- split_absences(cleaned)
+    cleaned <- split_absences(cleaned,to_fix=absent_bill)
   }
 
   if(use_both==TRUE) {

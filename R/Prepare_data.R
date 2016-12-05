@@ -378,7 +378,7 @@ split_absences <- function(cleaned=NULL,to_fix=NULL) {
       ungroup %>% select(id,legis.names,bloc,type,bill,vote) %>% spread(key=bill,value=vote) %>% arrange(legis.names)
 
     if(refbill %in% names(bloc_bill)) {
-      bloc_bill <- select(bloc_bill,-one_of_col(refbill),one_of_col(refbill))
+      bloc_bill <- select(bloc_bill,-one_of(refbill),one_of(refbill))
     }
 
     return(bloc_bill)

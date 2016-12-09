@@ -237,18 +237,18 @@ fix_bills_discrim <- function(opp=NULL,gov=NULL,vote_data=NULL,legislature=NULL,
   gov_votes <- gov_votes %>% group_by(Bill) %>% summarize(yes=mean(amount==3,na.rm=TRUE),
                                                           no=mean(amount==1,na.rm=TRUE),
                                                           abstain=mean(amount==2,na.rm=TRUE),
-                                                          quorum=sum(amount==3,na.rm=TRUE)/ngov) %>%
+                                                          quorum=sum(amount %in% c(1,2,3),na.rm=TRUE)/ngov) %>%
     filter(yes>.8, quorum>.6)
   } else if(to_run==3 & use_nas==TRUE) {
     gov_votes <- gov_votes %>% group_by(Bill) %>% summarize(yes=mean(amount==4,na.rm=TRUE),
                                                             no=mean(amount==1,na.rm=TRUE),
                                                             abstain=mean(amount==2,na.rm=TRUE),
-                                                            quorum=sum(amount==4,na.rm=TRUE)/ngov) %>%
+                                                            quorum=sum(amount %in% c(1,2,4),na.rm=TRUE)/ngov) %>%
       filter(yes>.8, quorum>.6)
     }else {
     gov_votes <- gov_votes %>% group_by(Bill) %>% summarize(yes=mean(amount==1,na.rm=TRUE),
                                                             no=mean(amount==0,na.rm=TRUE),
-                                                            quorum=sum(amount==1,na.rm=TRUE)/ngov) %>%
+                                                            quorum=sum(amount %in% c(1,0),na.rm=TRUE)/ngov) %>%
       filter(yes>.8, quorum>.6)
 }
   opp_votes <- vote_data[[legislature]] %>% filter(bloc==opp) %>% distinct
@@ -260,18 +260,18 @@ fix_bills_discrim <- function(opp=NULL,gov=NULL,vote_data=NULL,legislature=NULL,
   opp_votes <- opp_votes %>% group_by(Bill) %>% summarize(yes=mean(amount==3,na.rm=TRUE),
                                                           no=mean(amount==1,na.rm=TRUE),
                                                           abstain=mean(amount==2,na.rm=TRUE),
-                                                          quorum=sum(amount==3,na.rm=TRUE)/nopp) %>%
+                                                          quorum=sum(amount %in% c(1,2,3),na.rm=TRUE)/nopp) %>%
     filter(yes>.8,quorum>.6)
   } else if(to_run==3 & use_nas==TRUE) {
     opp_votes <- opp_votes %>% group_by(Bill) %>% summarize(yes=mean(amount==4,na.rm=TRUE),
                                                             no=mean(amount==1,na.rm=TRUE),
                                                             abstain=mean(amount==2,na.rm=TRUE),
-                                                            quorum=sum(amount==4,na.rm=TRUE)/nopp) %>%
+                                                            quorum=sum(amount %in% c(1,2,4),na.rm=TRUE)/nopp) %>%
     filter(yes>.8,quorum>.6)
   } else {
     opp_votes <- opp_votes %>% group_by(Bill) %>% summarize(yes=mean(amount==1,na.rm=TRUE),
                                                             no=mean(amount==0,na.rm=TRUE),
-                                                            quorum=sum(amount==1,na.rm=TRUE)/nopp) %>%
+                                                            quorum=sum(amount %in% c(0,1),na.rm=TRUE)/nopp) %>%
       filter(yes>.8,quorum>.6)
 }
   #remove any bills that both opp and gov voted for
@@ -287,7 +287,33 @@ fix_bills_discrim <- function(opp=NULL,gov=NULL,vote_data=NULL,legislature=NULL,
     group_by(bill_num) %>% summarize(num_miss=sum(is.na(bill_vote)),nos=mean(bill_vote==1,na.rm=TRUE)/num_miss) %>%
     arrange(-nos)
 
-  return(list(gov=gov_votes$Bill,opp=opp_votes$Bill,no_bill=no_bill$bill_num[1]))
+ # Figure out which bills should be loaded negative (government) on absence
+ abs_votes <- vote_data[[legislature]] %>% filter(bloc==gov) %>% distinct
+
+ abs_votes %<>% gather(Bill,amount,matches('Bill'))
+
+  abs_gov_votes <- abs_votes %>% group_by(Bill) %>% summarize(yes=mean(amount==4,na.rm=TRUE),
+                                                              no=mean(amount==1,na.rm=TRUE),
+                                                              abstain=mean(amount==2,na.rm=TRUE),
+                                                              quorum=sum(amount %in% c(1,2,4),na.rm=TRUE)/ngov)
+
+  abs_votes <- vote_data[[legislature]] %>% filter(bloc==opp) %>% distinct
+
+  abs_votes %<>% gather(Bill,amount,matches('Bill'))
+
+  abs_opp_votes <- abs_votes %>% group_by(Bill) %>% summarize(yes=mean(amount==4,na.rm=TRUE),
+                                                              no=mean(amount==1,na.rm=TRUE),
+                                                              abstain=mean(amount==2,na.rm=TRUE),
+                                                              quorum=sum(amount %in% c(1,2,4),na.rm=TRUE)/ngov)
+
+  abs_gov_votes %<>% arrange(desc(quorum))
+  abs_opp_votes %<>% arrange(desc(quorum))
+  abs_votes <- abs_gov_votes$Bill[1:10]
+  abs_opp <-abs_opp_votes$Bill[1:10]
+
+  abs_votes <- abs_votes[!(abs_votes %in% abs_opp)]
+
+  return(list(gov=gov_votes$Bill,opp=opp_votes$Bill,no_bill=no_bill$bill_num[1],abs=abs_votes))
 
 }
 
@@ -377,7 +403,7 @@ split_absences <- function(cleaned=NULL,to_fix=NULL) {
     bloc_bill <- bloc_bill %>% mutate(vote_orig=vote,vote=change_votes(vote,yes,no)) %>%
       ungroup %>% select(id,legis.names,bloc,type,bill,vote) %>% spread(key=bill,value=vote) %>% arrange(legis.names)
 
-    if(refbill %in% names(bloc_bill)) {
+    if(refbill[1] %in% names(bloc_bill)) {
       bloc_bill <- select(bloc_bill,-one_of(refbill),one_of(refbill))
     }
 

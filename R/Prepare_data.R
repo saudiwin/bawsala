@@ -308,10 +308,10 @@ fix_bills_discrim <- function(opp=NULL,gov=NULL,vote_data=NULL,legislature=NULL,
 
   abs_gov_votes %<>% arrange(desc(quorum))
   abs_opp_votes %<>% arrange(desc(quorum))
-  abs_votes <- abs_gov_votes$Bill[1:10]
+  abs_gov <- abs_gov_votes$Bill[1:10]
   abs_opp <-abs_opp_votes$Bill[1:10]
 
-  abs_votes <- abs_votes[!(abs_votes %in% abs_opp)]
+  abs_votes <- abs_opp[!(abs_opp %in% abs_gov)]
 
   return(list(gov=gov_votes$Bill,opp=opp_votes$Bill,no_bill=no_bill$bill_num[1],abs=abs_votes))
 

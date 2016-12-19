@@ -69,7 +69,7 @@ posterior_predict <- function(summary_data=NULL,y=NULL,ll=NULL,bb=NULL,num_iters
   for(i in 1:100) {
     for(n in 1:length(y)) {
       # Only calculate ordinal model if legislator is present
-      pi1 <- plogis(summary$sigma_abs[bb[n],i] * summary$L_open[ll[n],i] - summary$B_abs[bb[n],i])
+      pi1 <- plogis(summary$sigma_abs_open[bb[n],i] * summary$L_open[ll[n],i] - summary$B_abs[bb[n],i])
       absent <- rbinom(n=1,size=1,prob=pi1)
       if(absent==1) {
         Y_rep[n,i] <- 4

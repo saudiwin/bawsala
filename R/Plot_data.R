@@ -2,7 +2,7 @@
 #' @export
 plot_IRT <- function(cleaned=NULL,stan_obj=NULL,legislature=NULL,plot_param=NULL,true_params='none',
                      ggplot=FALSE) {
-  means_fit <- rstan::summary(sample_fit)[[1]]
+  means_fit <- rstan::summary(stan_obj)[[1]]
   legis_means <- as_tibble(means_fit[grepl(paste0(plot_param,"\\["),row.names(means_fit)),])
 
   # Only need to use the specific legislature of interest for plotting
@@ -27,7 +27,7 @@ plot_IRT <- function(cleaned=NULL,stan_obj=NULL,legislature=NULL,plot_param=NULL
       outplot %<>% add_markers(x=~true_params,y=~legis.names,color="red",symbols='x')
     }
   } else {
-    outplot <- ggplot(legis_means,aes(x=estimate,y=reorder(legis.names,estimate),color=bloc,xmin=`2.5%`,xmax=`97.5%`)) +
+    outplot <- ggplot(legis_means,aes(x=estimate,y=reorder(legis.names,estimate),xmin=`2.5%`,xmax=`97.5%`,color=bloc)) +
       theme_minimal() +
       geom_point() + geom_errorbarh()
 

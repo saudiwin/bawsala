@@ -12,7 +12,7 @@ negative.
 For other bills, discrimination is free to float.}
 \usage{
 fix_bills_discrim(opp = NULL, gov = NULL, vote_data = NULL,
-  legislature = NULL)
+  legislature = NULL, to_run = NULL, use_nas = NULL)
 }
 \arguments{
 \item{opp}{Character, name of opposition party to filter data}

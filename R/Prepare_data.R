@@ -13,11 +13,11 @@
 
   # Load in new data and also old data on ARP (as new ARP data is not complete with bills + articles)
   arp_votes <- data.table::fread(system.file('extdata',"ARP_votes_all.csv",package='bawsala'),
-                                 header=TRUE) %>% as_tibble
+                                 header=TRUE,encoding='Latin-1') %>% as_tibble
   names(arp_votes) <- .change_names(names(arp_votes))
 
   anc_votes <- data.table::fread(system.file('extdata','ANC_votes.csv',package='bawsala'),
-                                 sep=',',header=TRUE,strip.white=TRUE) %>% as_tibble
+                                 sep=',',header=TRUE,strip.white=TRUE,encoding='Latin-1') %>% as_tibble
   names(anc_votes) <- .change_names(names(anc_votes))
 
   # Load ARP bill names and labels, change bill names
@@ -401,7 +401,7 @@ split_absences <- function(cleaned=NULL,to_fix=NULL) {
       group_by(bloc,bill) %>% mutate(yes=sum(vote==4)/length(bloc),no=sum(vote==1)/length(bloc))
 
     bloc_bill <- bloc_bill %>% mutate(vote_orig=vote,vote=change_votes(vote,yes,no)) %>%
-      ungroup %>% select(id,legis.names,bloc,type,bill,vote) %>% spread(key=bill,value=vote) %>% arrange(legis.names)
+      ungroup %>% select(legis.names,bloc,type,bill,vote) %>% spread(key=bill,value=vote) %>% arrange(legis.names)
 
     if(refbill[1] %in% names(bloc_bill)) {
       bloc_bill <- select(bloc_bill,-one_of(refbill),one_of(refbill))
@@ -436,11 +436,16 @@ prepare_matrix <- function(cleaned=NULL,legis=1,legislature=NULL,to_fix=NULL,to_
       cols_sel_opp <- match(to_fix$opp,check_names)
       cols_sel_gov <- match(to_fix$gov,check_names)
       cols_sel_nobill <- match(to_fix$no_bill,check_names)
+      cols_sel_opp <- cols_sel_opp[!is.na(cols_sel_opp)]
+      cols_sel_gov <- cols_sel_gov[!is.na(cols_sel_gov)]
+      cols_sel_nobill <- cols_sel_nobill[!is.na(cols_sel_nobill)]
       if(only_gov==TRUE) {
         cols_sel_opp <- NULL
         cols_sel_nobill <- NULL
       }
+      if(any(length(cols_sel_gov)>0,length(cols_sel_nobill)>0,length(cols_sel_opp)>0)) {
       x <- bind_cols(select(x,-c(cols_sel_opp,cols_sel_gov)),select(x,c(cols_sel_opp,cols_sel_gov)))
+      }
       return(list(data=x,opp_num=length(cols_sel_opp),gov_num=length(cols_sel_gov)))
     })
       opp_num <- cleaned[[legislature]]$opp_num

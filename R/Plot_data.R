@@ -1,7 +1,7 @@
 #' @import plotly
 #' @export
 plot_IRT <- function(cleaned=NULL,stan_obj=NULL,legislature=NULL,plot_param=NULL,true_params='none',
-                     ggplot=FALSE) {
+                     ggplot=FALSE,text_labsize=4) {
   means_fit <- rstan::summary(stan_obj)[[1]]
   legis_means <- as_tibble(means_fit[grepl(paste0(plot_param,"\\["),row.names(means_fit)),])
 
@@ -32,7 +32,7 @@ plot_IRT <- function(cleaned=NULL,stan_obj=NULL,legislature=NULL,plot_param=NULL
   } else {
     outplot <- ggplot(legis_means,aes(x=estimate,y=reorder(legis.names,estimate),label=bloc_l,xmin=`2.5%`,xmax=`97.5%`,color=bloc)) +
       theme_minimal() +
-      geom_text(color='black') + geom_errorbarh()
+      geom_text(color='black',size=text_labsize) + geom_errorbarh() + xlab("") + ylab("")
 
     if(true_params!='none') {
 

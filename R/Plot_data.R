@@ -14,7 +14,10 @@ plot_IRT <- function(cleaned=NULL,stan_obj=NULL,legislature=NULL,plot_param=NULL
 
   legis_means %<>% arrange(desc(estimate)) %>% mutate(lowci=abs(estimate-`2.5%`),highci=abs(estimate-`97.5%`),
                                                       legis.names=factor(legis.names,levels=legis.names),
-                                                      true_params=true_params)
+                                                      true_params=true_params) %>%
+    mutate(bloc_l= as.character(factor(bloc,labels=c('Afek Tounes','Aucun','Horra','Social-Democrat',
+                                                     'FP','Nahda','Nidaa Tounes','UPL'))),
+           bloc_l=substr(bloc_l,1,2))
   if(ggplot==FALSE) {
     outplot <- plot_ly(legis_means,x=~estimate,y=~legis.names,color=~factor(bloc)) %>%
       add_markers(error_x=~list(arrayminus=lowci,array=highci)) %>%
@@ -27,9 +30,9 @@ plot_IRT <- function(cleaned=NULL,stan_obj=NULL,legislature=NULL,plot_param=NULL
       outplot %<>% add_markers(x=~true_params,y=~legis.names,color="red",symbols='x')
     }
   } else {
-    outplot <- ggplot(legis_means,aes(x=estimate,y=reorder(legis.names,estimate),xmin=`2.5%`,xmax=`97.5%`,color=bloc)) +
+    outplot <- ggplot(legis_means,aes(x=estimate,y=reorder(legis.names,estimate),label=bloc_l,xmin=`2.5%`,xmax=`97.5%`,color=bloc)) +
       theme_minimal() +
-      geom_point() + geom_errorbarh()
+      geom_text() + geom_errorbarh()
 
     if(true_params!='none') {
 
